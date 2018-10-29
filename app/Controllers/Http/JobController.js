@@ -9,7 +9,7 @@ class JobController {
    * GET jobs
    */
   async index ({ request, response, view }) {
-    response.send('vijay')
+    response.send('index')
   }
 
   /**
