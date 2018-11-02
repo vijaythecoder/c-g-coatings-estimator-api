@@ -3,17 +3,17 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class JobsSchema extends Schema {
+class MaterialsSchema extends Schema {
   up () {
-    this.create('jobs', (table) => {
+    this.create('materials', (table) => {
       table.increments()
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('jobs')
+    this.drop('materials')
   }
 }
 
-module.exports = JobsSchema
+module.exports = MaterialsSchema
