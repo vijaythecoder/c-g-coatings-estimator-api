@@ -7,6 +7,8 @@ class MiscellaneousCostsSchema extends Schema {
   up () {
     this.create('miscellaneous_costs', (table) => {
       table.increments()
+      table.string('desc')
+      table.integer('dollars')
       table.timestamps()
     })
   }
