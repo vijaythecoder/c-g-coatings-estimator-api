@@ -18,6 +18,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    return view.render('index')
   }
 
   /**
@@ -30,6 +31,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
+    return view.render('create')
   }
 
   /**
@@ -53,6 +55,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    return view.render('show')
   }
 
   /**
@@ -65,6 +68,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async edit ({ params, request, response, view }) {
+    return view.render('edit')
   }
 
   /**
