@@ -15,8 +15,23 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
+const Database = use('Database')
 
 // Route.on('/').render('welcome')
 Route.on('/').render('login')
 
 Route.resource('/jobs', 'JobController')
+Route.resource('/EstimateController', 'EstimateController')
+
+
+Route.get('/posts', async () => {
+    return await Database.table('samples').select('*')
+  })
+
+  //for authentication
+  Route
+  .get('users/:id', 'UserController.show')
+  .middleware('auth')
+
+Route.post('login', 'UserController.login')
+
