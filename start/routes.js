@@ -20,4 +20,4 @@ const Database = use('Database')
 // Route.on('/').render('welcome')
 Route.on('/').render('login')
 
-Route.resource('/index', 'EstimateController')
+Route.resource('/', 'EstimateController')

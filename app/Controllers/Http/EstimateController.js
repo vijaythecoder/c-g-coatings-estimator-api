@@ -55,7 +55,15 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
-    return view.render('show')
+    if(params.id=="show"){
+      return view.render('show')
+    }
+    if(params.id=="delete"){
+      return view.render('delete')
+    }
+    if(params.id=="index"){
+      return view.render('index')
+    }
   }
 
   /**
