@@ -7,7 +7,7 @@ class MaterialsSchema extends Schema {
   up () {
     this.create('materials', (table) => {
       table.increments()
-      table.string('product')
+      table.string('product').unique()
       table.integer('unit_cost')
       table.integer('coverage_area')
       table.timestamps()
