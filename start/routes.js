@@ -35,7 +35,8 @@ Route.get('/posts', async () => {
   .get('users/:id', 'UserController.show')
   .middleware('auth')
 
-  Route.post('/login', 'UserController.login')
+  // Route.post('/login', 'UserController.login')
+  Route.post('/login', 'UserController.store')
 
 //   Route.get('/login', 'AuthController.index')
 // Route.post('/login', 'AuthController.login')
