@@ -7,6 +7,7 @@
 /**
  * Resourceful controller for interacting with estimates
  */
+//const estimate = use('App/Model/Estimate')
 class EstimateController {
   /**
    * Show a list of all estimates.
@@ -17,9 +18,11 @@ class EstimateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
-    return view.render('index')
-  }
+  // async index ({ request, response, view }) {
+  //   const estimates = yield estimate.all()
+  //   yield response.sendView('create', { estimates: estimates.toJSON() })
+  //  // return view.render('index')
+  // }
 
   /**
    * Render a form to be used for creating a new estimate.
@@ -31,8 +34,12 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
+    
+
     return view.render('create')
+
   }
+
 
   /**
    * Create/save a new estimate.
@@ -55,16 +62,22 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
-    if(params.id=="show"){
-      return view.render('show')
-    }
-    if(params.id=="delete"){
-      return view.render('delete')
-    }
-    if(params.id=="index"){
-      return view.render('index')
-    }
-  }
+    const posts = [
+      {title: 'Job name', body: 'name'},
+      {title: 'location', body: 'location'},
+      {title: 'num_of_sqft', body: 'sqft'},
+      {title: 'num_of_days', body: 'days'},
+
+    ]
+	return view.render('show', {
+    title: 'Estimates',
+    posts: posts
+  })
+
+}
+    
+    
+  
 
   /**
    * Render a form to update an existing estimate.

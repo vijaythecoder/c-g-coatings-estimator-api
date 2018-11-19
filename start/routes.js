@@ -23,6 +23,7 @@ Route.on('/').render('login')
 Route.resource('/jobs', 'JobController')
 Route.resource('/EstimateController', 'EstimateController')
 
+
 // Route.resource('/UserController', 'UserController')
 Route.get('/contact', 'ViewController.contact')
 

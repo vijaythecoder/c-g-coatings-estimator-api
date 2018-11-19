@@ -1,1 +1,11 @@
-showing show page
+<h1>{{ title }}</h1>
+
+<table>
+@each(post in posts)
+<tr>
+    <td>{{ post.title }} : {{post.body }}</td>
+</tr>
+@endeach 
+</table>
+<ul>
+  
