@@ -2,8 +2,8 @@
 ## MVP 1 release
 | ID | User Story | Client Accepted | Comments | Assigned to |
 |--|--|--|--|--|
-| 1| As a user, I want to see a public page with contact information for the company and link to their Facebook page and/or website.| | | Sirisha |
-| 2 | As an administrator, I want to log in (so only authorized users can create estimates). | | | Sairam,Saicharan |
+| 1| As a user, I want to see a public page with contact information for the company and link to their Facebook page and/or website.| | | Sairam |
+| 2 | As an administrator, I want to log in (so only authorized users can create estimates). | | | Sirisha,Sairam,Saicharan |
 
 # Next Semester
 ## MVP 2 release
