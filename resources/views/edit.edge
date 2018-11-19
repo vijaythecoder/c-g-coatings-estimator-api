@@ -1,1 +1,10 @@
-showing edit page
+@layout('main')
+@section('content')
+<body>
+  @include('inc/navbar')
+
+  <form name = "editEstimates" method="POST" action="/EstimateController/edit">
+      @include('estimate')
+  </form>
+@endsection
+</body>
