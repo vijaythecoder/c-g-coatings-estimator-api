@@ -62,16 +62,9 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
-    const posts = [
-      {title: 'Job name', body: 'name'},
-      {title: 'location', body: 'location'},
-      {title: 'num_of_sqft', body: 'sqft'},
-      {title: 'num_of_days', body: 'days'},
-
-    ]
-	return view.render('show', {
-    title: 'Estimates',
-    posts: posts
+    
+	return view.render('show',  { 
+    title: 'ID', body: params.id
   })
 
 }
