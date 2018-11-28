@@ -21,7 +21,7 @@ const Database = use('Database')
 Route.on('/').render('login')
 
 Route.resource('/jobs', 'JobController')
-Route.resource('/EstimateController', 'EstimateController')
+Route.resource('/estimates', 'EstimateController')
 Route.resource('/users','UserController')
 
 Route.get('/create', 'ViewController.create')

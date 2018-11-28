@@ -1,0 +1,11 @@
+@layout('master')
+
+@section('content')
+    <div class="box">
+            <div class="float-right"><a href="{{ route('/estimates') }}">
+                All Estimates
+              </a></div>
+            <h1 class="title">Estimate {{ estimate.id }}</h1>
+            JOb Name: {{ estimate.job_name }}
+    </div>
+@endsection

@@ -3,7 +3,7 @@
 @section('content')
 <div class="box">
     <div class="float-right"><a href="{{ route('/estimates/create') }}">
-            Create estimate
+            Create Estimate
           </a></div>
     <h1 class="title">estimate List</h1>
 
@@ -17,8 +17,8 @@
         <thead>
           <tr>
             <th>SN</th>
-            <th>Title</th>
-            <th>Action</th> 
+            <th>Name</th>
+            <th colspan="2" class="text-center">Actions</th> 
           </tr>
         </thead>
         <tbody>
@@ -29,6 +29,9 @@
                 </td>
                 <td>
                     {{ estimate.job_name }}
+                </td>
+                <td>
+                    <a href="{{ route('/estimates/' + estimate.id) }}" class="btn btn-primary">View</a>
                 </td>
                 <td>
                     <form action="{{ 'estimates/' + estimate.id + '?_method=DELETE' }}" method="POST">
