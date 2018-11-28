@@ -6,6 +6,7 @@
   <form name = "createEstimates" method="POST" action="/EstimateController/create">
       @include('estimate')
 
+      console.log({{ auth.user }})
       <form method="get" action="/flight">
         <input type="submit" value="Return to list" class="btn btn-caution" />
       </form>
