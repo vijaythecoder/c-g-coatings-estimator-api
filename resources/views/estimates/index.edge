@@ -34,6 +34,9 @@
                     <a href="{{ '/estimates/' + estimate.id }}" class="btn btn-primary">View</a>
                 </td>
                 <td>
+                    <a href="{{ '/estimates/' + estimate.id + '/edit' }}" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
                     <form action="{{ 'estimates/' + estimate.id + '?_method=DELETE' }}" method="POST">
                         {{ csrfField() }}
                         <button class="button is-danger" type="submit">Delete</button>

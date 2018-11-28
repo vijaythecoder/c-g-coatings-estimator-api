@@ -8,12 +8,12 @@
               </a>
             </div>
         <h1 class="title">Create New Estimate</h1>
-        <form action="/estimates/store" method="post">
+        <form action="{{ '/estimates/' + estimate.id + '?_method=PUT' }}" method="post">
             {{ csrfField() }}
             @include('estimates.fields')
             
             <div class="form-group">
-                <button type="submit" class="button is-success">Create Estimate</button>
+                <button type="submit" class="button is-success">Update Estimate</button>
             </div>
         </form>
     </div>
