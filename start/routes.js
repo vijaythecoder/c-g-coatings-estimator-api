@@ -21,21 +21,11 @@ const Database = use('Database')
 Route.on('/').render('login')
 
 Route.resource('/jobs', 'JobController')
-Route.resource('/estimates', 'EstimateController')
+Route.resource('/estimates', 'EstimateController').middleware(['auth'])
+
 Route.resource('/users','UserController')
 
-Route.get('/create', 'ViewController.create')
-Route.get('/delete', 'ViewController.delete')
-Route.get('/show', 'ViewController.show')
-Route.get('/edit', 'ViewController.edit')
-Route.get('/estimate', 'ViewController.estimate')
-
-
-// Route.resource('/UserController', 'UserController')
 Route.get('/contact', 'ViewController.contact')
-
-
-
 
 Route.get('/posts', async () => {
     return await Database.table('samples').select('*')
@@ -48,6 +38,7 @@ Route.get('/posts', async () => {
 
   Route.post('/login', 'UserController.login')
   Route.get('/login','UserController.show')
+  Route.get('/logout','UserController.logout')
   // Route.post('/login', 'UserController.store')
 
 

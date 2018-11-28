@@ -18,7 +18,7 @@
           <tr>
             <th>SN</th>
             <th>Name</th>
-            <th colspan="2" class="text-center">Actions</th> 
+            <th colspan="3" class="text-center">Actions</th> 
           </tr>
         </thead>
         <tbody>
@@ -30,13 +30,13 @@
                 <td>
                     {{ estimate.job_name }}
                 </td>
-                <td>
+                <td class="text-center">
                     <a href="{{ '/estimates/' + estimate.id }}" class="btn btn-primary">View</a>
                 </td>
-                <td>
+                <td class="text-center">
                     <a href="{{ '/estimates/' + estimate.id + '/edit' }}" class="btn btn-primary">Edit</a>
                 </td>
-                <td>
+                <td class="text-center">
                     <form action="{{ 'estimates/' + estimate.id + '?_method=DELETE' }}" method="POST">
                         {{ csrfField() }}
                         <button class="button is-danger" type="submit">Delete</button>
