@@ -22,6 +22,7 @@ Route.on('/').render('login')
 
 Route.resource('/jobs', 'JobController')
 Route.resource('/estimates', 'EstimateController').middleware(['auth'])
+Route.get('/estimates/create/:id', 'EstimateController.duplicate').middleware(['auth'])
 
 Route.resource('/users','UserController')
 
