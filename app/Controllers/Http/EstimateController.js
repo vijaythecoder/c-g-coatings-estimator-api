@@ -32,7 +32,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
-    return view.render('estimates.create', { estimate: [] })
+    // 
   }
 
   /**
