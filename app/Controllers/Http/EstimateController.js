@@ -18,9 +18,17 @@ class EstimateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index ({ auth, request, response, view }) {
+    console.log('inside Estimate controller index')
     const estimates = await Estimate.all()
-    return view.render('estimates.index', { estimates: estimates.toJSON() })
+    if(auth.user === null){
+      return response.redirect('/')
+      return "you are not authenticated"
+       }
+    else{
+      return view.render('estimates.index', { estimates: estimates.toJSON() })
+
+    }
   }
 
   /**
@@ -75,11 +83,10 @@ class EstimateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
-    
+  async show ({params, request, response, view }) {
+  
     const estimate = await Estimate.find(params.id)
     return view.render('estimates.show', { estimate: estimate.toJSON() })
-	
 }
 
   /**

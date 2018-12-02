@@ -21,11 +21,14 @@ const Database = use('Database')
 Route.on('/').render('login')
 
 Route.resource('/jobs', 'JobController')
-Route.resource('/estimates', 'EstimateController').middleware(['auth'])
+// Route.resource('/estimates', 'EstimateController').middleware(['auth'])
+Route.resource('/estimates', 'EstimateController')
+Route.post('login', 'UserController.login')
 
 Route.resource('/users','UserController')
 
 Route.get('/contact', 'ViewController.contact')
+
 
 Route.get('/posts', async () => {
     return await Database.table('samples').select('*')
@@ -36,7 +39,7 @@ Route.get('/posts', async () => {
   .get('users/:id', 'UserController.show')
   .middleware('auth')
 
-  Route.post('/login', 'UserController.login')
+  // Route.post('/login', 'UserController.login')
   Route.get('/login','UserController.show')
   Route.get('/logout','UserController.logout')
   // Route.post('/login', 'UserController.store')
