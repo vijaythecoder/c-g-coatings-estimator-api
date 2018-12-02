@@ -33,6 +33,7 @@ class EstimateController {
    */
   async create ({ request, response, view }) {
     // 
+    return view.render('estimates.create', { estimate: [] })
   }
 
   /**
