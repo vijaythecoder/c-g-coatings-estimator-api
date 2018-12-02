@@ -84,17 +84,11 @@ class EstimateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-<<<<<<< HEAD
   async show ({params, request, response, view }) {
   
     const estimate = await Estimate.find(params.id)
     return view.render('estimates.show', { estimate: estimate.toJSON() })
 }
-=======
-  async show ({ params, request, response, view }) {
-    // show single estimate
-  }
->>>>>>> f6ebdc505165c5f7b36c1be417c73f2542724836
 
   /**
    * Render a form to update an existing estimate.
