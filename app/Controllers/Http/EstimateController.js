@@ -41,9 +41,9 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
+    // 
     return view.render('estimates.create', { estimate: [] })
   }
-
 
   /**
    * Create/save a new estimate.
@@ -54,24 +54,25 @@ class EstimateController {
    * @param {Response} ctx.response
    */
   async store ({ request, response, session }) {
-    const estimate = new Estimate()
-    estimate.job_name = request.input('job_name')
-    estimate.location = request.input('location')
-    estimate.num_of_sqft = request.input('num_of_sqft')
-    estimate.num_of_days = request.input('num_of_days')
-    estimate.hours_worked_per_day = request.input('hours_worked_per_day')
-    estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
-    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
-    estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
-    estimate.food_dollars_per_day = request.input('food_dollars_per_day')
-    estimate.num_of_vehicles = request.input('num_of_vehicles')
-    estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
-    estimate.dollars_per_mile = request.input('dollars_per_mile')
-    estimate.multiplier = request.input('multiplier')
-    
-    await estimate.save();
-    session.flash({ notification: 'Estimate added!' })
-    return response.redirect('/estimates')
+    // Add logic here for saving the estimate
+      const estimate = new Estimate()
+      estimate.job_name = request.input('job_name')
+      estimate.location = request.input('location')
+      estimate.num_of_sqft = request.input('num_of_sqft')
+      estimate.num_of_days = request.input('num_of_days')
+      estimate.hours_worked_per_day = request.input('hours_worked_per_day')
+      estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
+      estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
+      estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
+      estimate.food_dollars_per_day = request.input('food_dollars_per_day')
+      estimate.num_of_vehicles = request.input('num_of_vehicles')
+      estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
+      estimate.dollars_per_mile = request.input('dollars_per_mile')
+      estimate.multiplier = request.input('multiplier')
+      
+      await estimate.save();
+      session.flash({ notification: 'Estimate added!' })
+      return response.redirect('/estimates')
   }
 
   /**
@@ -83,11 +84,17 @@ class EstimateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
+<<<<<<< HEAD
   async show ({params, request, response, view }) {
   
     const estimate = await Estimate.find(params.id)
     return view.render('estimates.show', { estimate: estimate.toJSON() })
 }
+=======
+  async show ({ params, request, response, view }) {
+    // show single estimate
+  }
+>>>>>>> f6ebdc505165c5f7b36c1be417c73f2542724836
 
   /**
    * Render a form to update an existing estimate.
@@ -99,8 +106,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async edit ({ params, request, response, view }) {
-    const estimate = await Estimate.find(params.id)
-    return view.render('estimates.edit', { estimate: estimate.toJSON() })
+    // Edit Estimate
   }
 
   /**
@@ -112,26 +118,25 @@ class EstimateController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response, session }) {
-
     const estimate = await Estimate.find(params.id)
-
     estimate.job_name = request.input('job_name')
-    estimate.location = request.input('location')
-    estimate.num_of_sqft = request.input('num_of_sqft')
-    estimate.num_of_days = request.input('num_of_days')
-    estimate.hours_worked_per_day = request.input('hours_worked_per_day')
-    estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
-    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
-    estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
-    estimate.food_dollars_per_day = request.input('food_dollars_per_day')
-    estimate.num_of_vehicles = request.input('num_of_vehicles')
-    estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
-    estimate.dollars_per_mile = request.input('dollars_per_mile')
-    estimate.multiplier = request.input('multiplier')
-    
-    await estimate.save();
-    session.flash({ notification: 'Estimate updated!' })
-    return response.redirect('/estimates')
+   estimate.location = request.input('location')
+   estimate.num_of_sqft = request.input('num_of_sqft')
+   estimate.num_of_days = request.input('num_of_days')
+   estimate.hours_worked_per_day = request.input('hours_worked_per_day')
+   estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
+   estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
+   estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
+   estimate.food_dollars_per_day = request.input('food_dollars_per_day')
+   estimate.num_of_vehicles = request.input('num_of_vehicles')
+   estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
+   estimate.dollars_per_mile = request.input('dollars_per_mile')
+   estimate.multiplier = request.input('multiplier')
+   
+   await estimate.save();
+   session.flash({ notification: 'Estimate updated!' })
+   return response.redirect('/estimates')
+    // update estimate
   }
 
   /**
@@ -143,10 +148,7 @@ class EstimateController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response, session }) {
-    const estimate = await Estimate.find(params.id)
-    await estimate.delete()
-    session.flash({ notification: 'Estimate Deleted!' })
-    return response.redirect('/estimates')
+    // Delete estimate
   }
 }
 
