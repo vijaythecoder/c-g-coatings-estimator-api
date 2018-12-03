@@ -30,6 +30,7 @@ Mentors include:
 - Satya Sai Ram Vankina, <s531508@nwmissouri.edu>
 - Sai Sirisha Devineni, <s531367@nwmissouri.edu>
 - Saicharan Gurudu, <s531499@nwmissouri.edu>
+- Dattu Bhargav Medarametla, <s531439@nwmissouri.edu>
 
 ## Benefits
 - An user can quickly create and calculate the estimates.
@@ -78,7 +79,7 @@ This team is organized as follows.
 | Architect              | Sirisha       | Sairam, SaiCharan  | E-R diagram |
 | Data                   | SaiCharan     | Sairam, Sirisha    | Sample data |
 | UX                     | Sairam        |                    | Sketches  |
-| Testing & Acceptance   | Vijay         |                    | Stories, acceptance criteria |
+| Testing & Acceptance   | Dattu         |                    | Stories, acceptance criteria |
 
 
 ## Schedule
