@@ -29,6 +29,8 @@ Route.resource('/users','UserController')
 
 Route.get('/contact', 'ViewController.contact')
 
+Route.resource('/UserController', 'UserController')
+
 
 Route.get('/posts', async () => {
     return await Database.table('samples').select('*')
