@@ -112,6 +112,10 @@ class EstimateController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response, session }) {
+    const estimate = await Estimate.find(params.id)
+    await estimate.delete()
+    session.flash({ notification: 'Estimate Deleted!' })
+    return response.redirect('/estimates')
     // Delete estimate
   }
 }
