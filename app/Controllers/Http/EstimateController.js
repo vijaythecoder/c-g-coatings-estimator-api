@@ -23,7 +23,6 @@ class EstimateController {
     const estimates = await Estimate.all()
     if(auth.user === null){
       return response.redirect('/')
-      return "you are not authenticated"
        }
     else{
       return view.render('estimates.index', { estimates: estimates.toJSON() })
