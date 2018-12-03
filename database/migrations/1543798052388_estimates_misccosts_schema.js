@@ -7,6 +7,8 @@ class EstimatesMisccostsSchema extends Schema {
   up () {
     this.create('estimates_misccosts', (table) => {
       table.increments()
+      table.integer('estimate_id').unique().references('id').inTable('Estimates')
+      table.integer('misc_id').unique().references('id').inTable('Materials')
       table.timestamps()
     })
   }
