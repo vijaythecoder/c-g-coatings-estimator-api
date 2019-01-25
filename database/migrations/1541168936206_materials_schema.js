@@ -8,7 +8,6 @@ class MaterialsSchema extends Schema {
     this.create('materials', (table) => {
       table.increments()
       table.string('product').unique()
-      table.integer('estimate_id').references('id').inTable('Materials')
       table.integer('unit_cost')
       table.integer('coverage_area')
       table.timestamps()
