@@ -16,7 +16,7 @@ class UserController {
     async login ({ request, auth, response, session }) {
         await auth.logout()
         const { email, password } = request.all()
-        // console.log('Inside login ')
+        console.log('Inside login ')
 
         await auth.attempt(email, password)   
         session.flash({ notification: 'Successfully logged in' })        
