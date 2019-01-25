@@ -29,3 +29,11 @@ Factory.blueprint('App/Models/Sample', async (faker) => {
     userID: faker.integer({ min: 1, max: 100 })
   }
 })
+
+Factory.blueprint('App/Models/Material', async (faker) => {
+  return {
+    product: faker.name(),
+    unit_cost: faker.integer({ min: 100, max: 1000 }),
+    coverage_area: faker.integer({ min: 1, max: 500 })
+  }
+})
