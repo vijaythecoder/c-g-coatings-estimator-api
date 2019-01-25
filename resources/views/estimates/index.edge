@@ -1,6 +1,10 @@
 @layout('master')
 
 @section('content')
+<<<<<<< HEAD
+=======
+List  estimates
+>>>>>>> a5adfb665641a7141d471857be25a8d9a6dfcf49
 <div class="box">
     <div class="float-right"><a href="{{ route('/estimates/create') }}">
             Create Estimate
@@ -36,6 +40,7 @@
                 <td class="text-center">
                     <a href="{{ '/estimates/' + estimate.id + '/edit' }}" class="btn btn-primary">Edit</a>
                 </td>
+<<<<<<< HEAD
                 <td>
                 <form action="{{ 'estimates/' + estimate.id + '?_method=DELETE' }}" method="POST">
                     {{ csrfField() }}
@@ -43,6 +48,15 @@
                 </form>
                 </td>
                 
+=======
+                <td class="text-center">
+                    <form action="{{ 'estimates/' + estimate.id + '?_method=DELETE' }}" method="POST">
+                        {{ csrfField() }}
+                        <button class="button is-danger" type="submit">Delete</button>
+                    </form>
+                    
+                </td>
+>>>>>>> a5adfb665641a7141d471857be25a8d9a6dfcf49
             </tr>
             @endeach
         </tbody>
@@ -52,4 +66,8 @@
       @endif
                
 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> a5adfb665641a7141d471857be25a8d9a6dfcf49
 @endsection
