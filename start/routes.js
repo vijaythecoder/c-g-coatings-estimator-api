@@ -42,5 +42,9 @@ Route.get('/posts', async () => {
   Route.get('/logout','UserController.logout')
   // Route.post('/login', 'UserController.store')
 
+  //Register 
+  Route.on('/register').render('register');
+  Route.post('register','UserController.register').middleware(['auth']);
+
 
 

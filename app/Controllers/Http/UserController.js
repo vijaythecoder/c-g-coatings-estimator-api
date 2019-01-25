@@ -31,6 +31,21 @@ class UserController {
         console.log(auth.user.username)
         return auth.user
       }
+      async register({request,response,session}){
+        const User = use('App/Models/User');
+        // creating first user
+        const user = new User();
+        user.username = request.only(['username']).username;
+        user.email = request.only(['email']).email;
+        user.password = request.only(['password']).password ;
+
+        await user.save();
+        // session.flash({ notification: 'Successfully Registered' }) 
+        session.flash({ notification: 'New user '+ (request.only(['email']).email)+' Registered' })     
+        console.log("New user "+ (request.only(['email']).email)+" Registered")
+        console.log("Inside userController Register");
+        response.redirect('/')
+    }
       
       async logout({ auth, response }) {
           await auth.logout()
