@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3 d-flex flex-row p-2">
         <a class="navbar-brand" href="/">C&G Coatings </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>     
-        <div class="collapse float-right navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse float-right navbar-collapse  d-flex " id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="/estimates">Estimates <span class="sr-only">(current)</span></a>
@@ -12,13 +12,14 @@
               <a class="nav-link" href="/contact">Contact <span class="sr-only">(current)</span></a>
             </li>
             
-            <li class="nav-item active">
-              <a class="nav-link" href="/logout">Logout <span class="sr-only">(current)</span></a>
-            </li>
+
             <li class="nav-item active">
               <a class="nav-link" href="/register">Register <span class="sr-only">(current)</span></a>
             </li>
-
+            <li class="nav-item active d-flex flex-row p-2 ">
+              <a class="nav-link ml-auto p-2 mat-raised-button" style="width : 00px, padding:78px" href="/logout">Logout <span class="sr-only">(current)</span></a>
+            </li>
+            {{--  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>  --}}
           </ul>
         </div>
 </nav>

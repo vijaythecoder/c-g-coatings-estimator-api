@@ -148,4 +148,4 @@ class EstimateController {
     return response.redirect('/estimates')  }
 }
 
-module.exports = UserController
+module.exports = EstimateController
