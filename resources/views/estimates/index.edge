@@ -16,8 +16,10 @@
     <table class="table is-bordered is-striped is-narrow is-fullwidth">
         <thead>
           <tr>
+
             <th>SN</th>
             <th>Name</th>
+            
             <th colspan="3" class="text-center">Actions</th> 
           </tr>
         </thead>
@@ -25,6 +27,7 @@
             @each(estimate in estimates)
             <tr>
                 <td>
+                  
                     {{ ($loop.index + 1) }}
                 </td>
                 <td>
@@ -34,11 +37,13 @@
                     <a href="{{ '/estimates/' + estimate.id }}" class="btn btn-primary">View</a>
                 </td>
                 <td class="text-center">
+                   
                     <a href="{{ '/estimates/' + estimate.id + '/edit' }}" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
                 <form action="{{ 'estimates/' + estimate.id + '?_method=DELETE' }}" method="POST">
                     {{ csrfField() }}
+                   
                     <button class="button is-danger" type="submit">Delete</button>
                 </form>
                 </td>
