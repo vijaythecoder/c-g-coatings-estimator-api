@@ -24,7 +24,6 @@ class EstimateController {
        }
     else{
       return view.render('estimates.index', { estimates: estimates.toJSON() })
-
         // await auth.attempt(email, password)   
         // session.flash({ notification: 'Successfully logged in' })        
         // return response.redirect('/estimates')
