@@ -46,6 +46,9 @@ class UserController {
         console.log("Inside userController Register");
         response.redirect('/')
     }
+    // async isLoggedIn({request,response,auth}){
+    //     if(auth.)
+    // }
       
       async logout({ auth, response }) {
           await auth.logout()
