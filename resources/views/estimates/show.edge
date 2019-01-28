@@ -1,5 +1,81 @@
 @layout('master')
 
 @section('content')
+    <div class="box">
+            <div class="float-right"><a href="{{ route('/estimates') }}">
+                All Estimates
+              </a></div>
+            <h1 class="title">Estimate {{ estimate.id }}</h1>
+            <br>
+            <table class="table table-bordered">
+                <tbody>
+
+                    <tr> 
+                        <td>Job Name</td>
+                        <td> {{ estimate.job_name }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>Location</td>
+                        <td> {{ estimate.location }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>No.of Sqft</td>
+                        <td> {{ estimate.num_of_sqft }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>No.of Days</td>
+                        <td> {{ estimate.num_of_days }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>Hours worked per day</td>
+                        <td> {{ estimate.hours_worked_per_day }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>No.of Hotel Rooms</td>
+                        <td> {{ estimate.num_of_hotel_rooms }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>No.of Hotel Nights</td>
+                        <td> {{ estimate.num_of_hotel_nights }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>Hotel Dollars per Night</td>
+                        <td> {{ estimate.hotel_dollars_per_night }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>Food Dollars per day</td>
+                        <td> {{ estimate.food_dollars_per_day }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>No.of Vehicles</td>
+                        <td> {{ estimate.num_of_vehicles }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>No.of Miles per Vehicle</td>
+                        <td> {{ estimate.num_of_miles_pervehicle }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>Dollars per mile</td>
+                        <td> {{ estimate.dollars_per_mile }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>Multiplier</td>
+                        <td> {{ estimate.multiplier }}</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
     Show estimate in table
-@endsection
+@endsection 
