@@ -1,8 +1,6 @@
 'use strict'
 
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
+
 
 /**
  * Resourceful controller for interacting with estimates
@@ -26,7 +24,9 @@ class EstimateController {
        }
     else{
       return view.render('estimates.index', { estimates: estimates.toJSON() })
-
+        // await auth.attempt(email, password)   
+        // session.flash({ notification: 'Successfully logged in' })        
+        // return response.redirect('/estimates')
     }
   }
 
