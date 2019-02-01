@@ -47,7 +47,7 @@ Route.get('/posts', async () => {
   // Route.post('/login', 'UserController.store')
 
   //Register 
-  Route.on('/register').render('register');
+  Route.on('/register').render('register').middleware(['auth']);
   Route.post('register','UserController.register').middleware(['auth']);
 
 

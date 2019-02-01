@@ -1,6 +1,7 @@
 @layout('master')
 @section('content')
    {{--  <h1> {{ title }} </h1>  --}}
+   @loggedIn
 
    <form method="POST" action="/register">
     {{ csrfField() }}
@@ -27,5 +28,8 @@
     </div>
     <button name = "login" type="submit" class="btn btn-primary">Register</button>
   </form>
-
+     @else
+    <p> You are not logged In</p>
+    <a href="/">Go to Login</a>
+   @endloggedIn
  @endsection
