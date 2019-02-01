@@ -17,8 +17,9 @@ class UserController {
         await auth.logout()
         const { email, password } = request.all()
         console.log('Inside login ')
-
+        console.log(email, password)
         await auth.attempt(email, password)   
+        console.log('Inside login 2 ')
         session.flash({ notification: 'Successfully logged in' })        
         return response.redirect('/estimates')
     }
