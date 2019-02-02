@@ -99,7 +99,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async edit ({ params, request, response, view }) {
-    // Edit Estimate
+    return view.render('edit')
     
   }
 
