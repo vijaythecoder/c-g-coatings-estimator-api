@@ -37,9 +37,9 @@ Route.get('/posts', async () => {
   })
 
   //for authentication
-  Route
-  .get('users/:id', 'UserController.show')
-  .middleware('auth')
+  // Route
+  // .get('users/:id', 'UserController.show')
+  // .middleware('auth')
 
   // Route.post('/login', 'UserController.login')
   Route.get('/login','UserController.show')
