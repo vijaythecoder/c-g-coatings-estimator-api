@@ -17,6 +17,7 @@ class UserController {
         await auth.logout()
         const { email, password } = request.all()
         console.log('Inside login ')
+<<<<<<< HEAD
         try{
         await auth.attempt(email, password)
         session.flash({ notification:' Successfully logged in' })   
@@ -24,6 +25,12 @@ class UserController {
         catch{
         session.flash({ notification:' Enter correct credentials' }) 
         }      
+=======
+        console.log(email, password)
+        await auth.attempt(email, password)   
+        console.log('Inside login 2 ')
+        session.flash({ notification: 'Successfully logged in' })        
+>>>>>>> b7bee62ea02ccc237f4e6ad35cd1c82e4e2e50aa
         return response.redirect('/estimates')
     }
 
