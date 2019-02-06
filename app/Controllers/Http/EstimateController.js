@@ -99,10 +99,14 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async edit ({ params, request, response, view }) {
-    return view.render('edit')
-    const estimate = await Estimate.find(params.id)
-    return view.render('estimates.edit', { estimate: estimate.toJSON() 
-  })
+     //
+    
+     console.log('edit');
+     const estimate = await Estimate.find(params.id)
+     return view.render('estimates.edit', { estimate: estimate.toJSON()})
+   
+
+ 
   }
   /**
    * Update estimate details.
