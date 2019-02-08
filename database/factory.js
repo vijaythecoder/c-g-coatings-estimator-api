@@ -30,6 +30,25 @@ Factory.blueprint('App/Models/Sample', async (faker) => {
   }
 })
 
+Factory.blueprint('App/Models/Estimate', async (faker) => {
+  return {
+    job_name: faker.name(),
+    location: faker.name(),
+    num_of_sqft: faker.integer({ min: 1, max: 100000 }),
+    num_of_days: faker.integer({ min: 1, max: 365 }),
+    hours_worked_per_day: faker.integer({ min: 1, max: 24 }),
+    num_of_hotel_rooms : faker.integer({ min: 1, max: 100 }),
+    num_of_hotel_nights :faker.integer({ min: 1, max: 100 }),
+    hotel_dollars_per_night:faker.integer({ min: 1, max: 1000 }),
+    food_dollars_per_day:faker.integer({ min: 1, max: 1000 }),
+    num_of_vehicles:faker.integer({ min: 1, max: 100 }),
+    num_of_miles_pervehicle:faker.integer({ min: 1, max: 1000 }),
+    dollars_per_mile:faker.integer({ min: 1, max: 1000 }),
+    multiplier:faker.integer({ min: 1, max: 50 })
+
+  }
+})
+
 Factory.blueprint('App/Models/Material', async (faker) => {
   return {
     product: faker.name(),

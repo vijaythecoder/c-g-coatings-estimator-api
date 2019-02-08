@@ -8,6 +8,7 @@
  * Resourceful controller for interacting with estimates
  */
 const Estimate = use('App/Models/Estimate')
+const EstimatesMaterial = use('App/Models/EstimatesMaterial')
 class EstimateController {
   /**
    * Show a list of all estimates.
@@ -21,13 +22,17 @@ class EstimateController {
   async index ({ auth, request, response, view }) {
     console.log('inside Estimate controller index')
     const estimates = await Estimate.all()
-    if(auth.user === null){
-      return response.redirect('/')
-       }
-    else{
+    // const estimatesMaterial = await EstimatesMaterial.all()
+    // const estimatesMiscost = await EstimatesMiscost.all()
+    // const estimatesMaterial = await EstimatesMaterial.all()
+    // if(auth.user === null){
+    //   return response.redirect('/')
+    //    }
+    // else{
+      // ,estimatesMaterial: estimatesMaterial.toJSON()
       return view.render('estimates.index', { estimates: estimates.toJSON() })
 
-    }
+    // }
   }
 
   /**
