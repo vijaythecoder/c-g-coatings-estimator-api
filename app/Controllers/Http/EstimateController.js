@@ -1,9 +1,5 @@
 'use strict'
 
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
-
 /**
  * Resourceful controller for interacting with estimates
  */
@@ -22,17 +18,17 @@ class EstimateController {
   async index ({ auth, request, response, view }) {
     console.log('inside Estimate controller index')
     const estimates = await Estimate.all()
-    // const estimatesMaterial = await EstimatesMaterial.all()
+    const estimatesMaterial = await EstimatesMaterial.all()
     // const estimatesMiscost = await EstimatesMiscost.all()
     // const estimatesMaterial = await EstimatesMaterial.all()
-    // if(auth.user === null){
-    //   return response.redirect('/')
-    //    }
-    // else{
+    if(auth.user === null){
+      return response.redirect('/')
+       }
+    else{
       // ,estimatesMaterial: estimatesMaterial.toJSON()
       return view.render('estimates.index', { estimates: estimates.toJSON() })
 
-    // }
+    }
   }
 
   /**
@@ -104,10 +100,15 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async edit ({ params, request, response, view }) {
-    // Edit Estimate
+     //
     
-  }
+     console.log('edit');
+     const estimate = await Estimate.find(params.id)
+     return view.render('estimates.edit', { estimate: estimate.toJSON()})
+   
 
+ 
+  }
   /**
    * Update estimate details.
    * PUT or PATCH estimates/:id

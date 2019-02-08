@@ -24,7 +24,7 @@ class UserController {
         return response.redirect('/estimates')
     }
 
-    show ({ auth, params }) {
+    async show ({ auth, params }) {
         console.log('inside show')
         if (auth.user.id !== Number(params.id)) {
           return 'You cannot see someone else\'s profile'
@@ -47,11 +47,31 @@ class UserController {
         console.log("Inside userController Register");
         response.redirect('/')
     }
+    // async isLoggedIn({request,response,auth}){
+    //     if(auth.)
+    // }
       
       async logout({ auth, response }) {
           await auth.logout()
           return response.redirect('/')
       }
+      async checkLoggedIn({auth,response}){
+          console.log('Inside checkLoggedIn')
+        try {
+            await auth.check()
+          } catch (error) {
+            session.flash({ notification:' Credentials missing ' })
+            response.send(error.message)
+          }
+      }
+
+      async getUser({auth,response}){try {
+        console.log('Inside getuser')
+        return await auth.getUser()
+      } catch (error) {
+        session.flash({ notification:' Credentials missing ' })
+        response.send('Credentials missing')
+      }}
 }
 
 module.exports = UserController
