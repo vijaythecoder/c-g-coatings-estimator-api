@@ -76,6 +76,27 @@
                     </tr>
                 </tbody>
             </table>
+
+            <h1 class="title">Materials {{ material.id }}</h1>
+            <table class="table table-bordered">
+                <tbody>
+
+                    <tr> 
+                        <td>Product</td>
+                        <td> {{ material.product }}</td>
+                    </tr>
+
+                    <tr> 
+                        <td>unit_cost</td>
+                        <td> {{ material.unit_cost }}</td>
+                    </tr>
+                    <tr> 
+                        <td>coverage_area</td>
+                        <td> {{ material.coverage_area }}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
     </div>
     Show estimate in table
 @endsection 
