@@ -23,13 +23,6 @@ Factory.blueprint('App/Models/User', async (faker) => {
   }
 })
 
-Factory.blueprint('App/Models/Sample', async (faker) => {
-  return {
-    name: faker.name(),
-    userID: faker.integer({ min: 1, max: 100 })
-  }
-})
-
 Factory.blueprint('App/Models/Estimate', async (faker) => {
   return {
     job_name: faker.name(),

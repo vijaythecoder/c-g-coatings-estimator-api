@@ -20,8 +20,6 @@ class EstimatesSchema extends Schema {
       table.integer('num_of_miles_pervehicle')
       table.float('dollars_per_mile')
       table.float('multiplier')
-      // table.integer('cost_id').references('id').inTable('MiscellaneousCosts')
-      // table.integer('material_id').references('id').inTable('Materials')
       table.timestamps()
     })
   }
