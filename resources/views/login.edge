@@ -1,7 +1,7 @@
 @layout('master')
 @section('content')
    {{--  <h1> {{ title }} </h1>  --}}
-
+  
    <form method="POST" action="/login">
     {{ csrfField() }}
     @if(old('notification'))
