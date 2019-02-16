@@ -16,7 +16,8 @@ class UserController {
         user.username = "ssID"
         user.email = 's531367@gmail.com'
         user.password = 'asd'
-        
+        await user.save()
+        console.log("Inside userController Store")
     }
 
     async login ({ request, auth, response, session }) {
