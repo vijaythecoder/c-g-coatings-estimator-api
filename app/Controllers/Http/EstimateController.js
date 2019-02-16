@@ -108,7 +108,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async edit ({ params, request, response, view }) {
-     //
+     //edit page of the estimates.
     
      console.log('edit');
      const estimate = await Estimate.find(params.id)
