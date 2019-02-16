@@ -25,7 +25,7 @@ class EstimateController {
       return response.redirect('/')
        }
     else{
-      // ,estimatesMaterial: estimatesMaterial.toJSON()
+      //,estimatesMaterial: estimatesMaterial.toJSON()
       return view.render('estimates.index', { estimates: estimates.toJSON() })
 
     }
@@ -41,7 +41,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
-    // 
+    // create estimate 
     return view.render('estimates.create', { estimate: [] })
   }
 
