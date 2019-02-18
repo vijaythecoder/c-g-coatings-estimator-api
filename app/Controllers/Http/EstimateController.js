@@ -26,42 +26,43 @@ class EstimateController {
     // const estimatesMaterial = await EstimatesMaterial.all()
     if(auth.user === null){
       return response.redirect('/')
-       }
+    }
     else{
       // ,estimatesMaterial: estimatesMaterial.toJSON()
-      var boostrapPaginator = new pagination.TemplatePaginator({
-        prelink:'/estimates', current: request.input('page'), rowsPerPage: 20,
-        totalResult: estimates.pages.total, slashSeparator: false,
-        template: function(result) {
-          var i, len, prelink;
-          var html = '<div><ul class="pagination justify-content-end">';
-          if(result.pageCount < 2) {
-            html += '</ul></div>';
-            return html;
-          }
-          prelink = this.preparePreLink(result.prelink);
-          if(result.previous) {
-            html += '<li class="page-item"><a class="page-link" href="' + prelink + result.previous + '">' + this.options.translator('PREVIOUS') + '</a></li>';
-          }
-          if(result.range.length) {
-            for( i = 0, len = result.range.length; i < len; i++) {
-              if(result.range[i] === result.current) {
-                html += '<li class="active page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-              } else {
-                html += '<li class="page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
-              }
-            }
-          }
-          if(result.next) {
-            html += '<li class="page-item"><a class="page-link" href="' + prelink + result.next + '" class="paginator-next">' + this.options.translator('NEXT') + '</a></li>';
-          }
-          html += '</ul></div>';
-          return html;
-        }
-      });
+      // var boostrapPaginator = new pagination.TemplatePaginator({
+      //   prelink:'/estimates', current: request.input('page'), rowsPerPage: 20,
+      //   totalResult: estimates.pages.total, slashSeparator: false,
+      //   template: function(result) {
+      //     var i, len, prelink;
+      //     var html = '<div><ul class="pagination justify-content-end">';
+      //     if(result.pageCount < 2) {
+      //       html += '</ul></div>';
+      //       return html;
+      //     }
+      //     prelink = this.preparePreLink(result.prelink);
+      //     if(result.previous) {
+      //       html += '<li class="page-item"><a class="page-link" href="' + prelink + result.previous + '">' + this.options.translator('PREVIOUS') + '</a></li>';
+      //     }
+      //     if(result.range.length) {
+      //       for( i = 0, len = result.range.length; i < len; i++) {
+      //         if(result.range[i] === result.current) {
+      //           html += '<li class="active page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
+      //         } else {
+      //           html += '<li class="page-item"><a class="page-link" href="' + prelink + result.range[i] + '">' + result.range[i] + '</a></li>';
+      //         }
+      //       }
+      //     }
+      //     if(result.next) {
+      //       html += '<li class="page-item"><a class="page-link" href="' + prelink + result.next + '" class="paginator-next">' + this.options.translator('NEXT') + '</a></li>';
+      //     }
+      //     html += '</ul></div>';
+      //     return html;
+      //   }
+      // });
+      // return 'vijay'
       // var paginator = pagination.create('search', {prelink:'/estimates', current: request.input('page'), rowsPerPage: 20, totalResult: estimates.pages.total});
       
-      return view.render('estimates.index', { estimates: estimates, pagination: boostrapPaginator.render() })
+      return view.render('estimates.index', { estimates: estimates })
 
     }
   }
