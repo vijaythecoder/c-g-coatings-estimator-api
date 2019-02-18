@@ -13,7 +13,7 @@ List  estimates
             {{ old('notification') }}
         </div>
     @endif
-    @if(estimates.length)  
+    @if(estimates.rows.length)  
     <table class="table is-bordered is-striped is-narrow is-fullwidth">
         <thead>
           <tr>
@@ -25,11 +25,10 @@ List  estimates
           </tr>
         </thead>
         <tbody>
-            @each(estimate in estimates)
+            @each(estimate in estimates.rows)
             <tr>
                 <td>
-                  
-                    {{ ($loop.index + 1) }}
+                    {{ estimate.id }}
                 </td>
                 <td>
                     {{ estimate.job_name }}
@@ -51,15 +50,11 @@ List  estimates
             @endeach
         </tbody>
       </table>
-      <table>
-          <p>new estimates material</p>
-      </table>
-
-
-      
       @else
         <div class="alert alert-warning">No estimates created yet!</div>
       @endif
                
 </div>
+{{{ pagination }}}
+
 @endsection
