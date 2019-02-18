@@ -76,7 +76,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
-    // 
+    // create estimate 
     return view.render('estimates.create', { estimate: [] })
   }
 
@@ -143,7 +143,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async edit ({ params, request, response, view }) {
-     //
+     //edit page of the estimates.
     
      console.log('edit');
      const estimate = await Estimate.find(params.id)
@@ -164,7 +164,8 @@ class EstimateController {
   async update ({ params, request, response, session }) {
     const estimate = await Estimate.find(params.id)
     const material = await Material.find(params.id)
-    estimate.job_name = request.input('job_name')
+   
+   estimate.job_name = request.input('job_name')
    estimate.location = request.input('location')
    estimate.num_of_sqft = request.input('num_of_sqft')
    estimate.num_of_days = request.input('num_of_days')
@@ -187,7 +188,7 @@ class EstimateController {
    await material.save();
    session.flash({ notification: 'Estimate updated! Materials updated' })
    return response.redirect('/estimates')
-    // update estimate
+    // update estimate 
   }
 
   /**
