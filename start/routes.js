@@ -17,12 +17,12 @@
 const Route = use('Route')
 const Database = use('Database')
 
-// Route.on('/').render('welcome')
 Route.on('/').render('login')
+Route.on('/login').render('login')
 
 
 // Route.resource('/estimates', 'EstimateController').middleware(['auth'])
-Route.resource('/estimates', 'EstimateController')
+Route.resource('/estimates', 'EstimateController').middleware('auth')
 Route.post('login', 'UserController.login')
 
 Route.resource('/users','UserController')

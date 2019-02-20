@@ -22,6 +22,10 @@ class EstimateController {
     return view.render('estimates.index', { estimates: estimates })
   }
 
+  async home({ response }) {
+    return response.redirect('/estimates')
+  }
+
   /**
    * Render a form to be used for creating a new estimate.
    * GET estimates/create
