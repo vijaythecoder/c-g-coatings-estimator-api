@@ -22,7 +22,7 @@ Route.on('/login').render('login')
 
 
 // Route.resource('/estimates', 'EstimateController').middleware(['auth'])
-Route.resource('/estimates', 'EstimateController').middleware('auth')
+Route.resource('/estimates', 'EstimateController')
 Route.post('login', 'UserController.login')
 
 Route.resource('/users','UserController')
@@ -31,7 +31,7 @@ Route.get('/contact', 'ViewController.contact')
 
 Route.resource('/UserController', 'UserController')
 
-Route.resource('/estimates', 'EstimateController')
+// Route.resource('/estimates', 'EstimateController')
 Route.get('/posts', async () => {
     return await Database.table('samples').select('*')
   })
