@@ -60,7 +60,7 @@ class UserController {
       
       async logout({ auth, response }) {
           await auth.logout()
-          return response.redirect('/')
+          return response.redirect('/login')
       }
       async checkLoggedIn({auth,response}){
           console.log('Inside checkLoggedIn')

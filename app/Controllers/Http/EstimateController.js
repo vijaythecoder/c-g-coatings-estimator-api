@@ -5,6 +5,8 @@
  */
 const Estimate = use('App/Models/Estimate')
 const Material = use('App/Models/Material')
+var pagination = require('pagination');
+
 class EstimateController {
   /**
    * Show a list of all estimates.
@@ -16,19 +18,12 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async index ({ auth, request, response, view }) {
-    console.log('inside Estimate controller index')
-    const estimates = await Estimate.all()
-    const materials = await Material.all()
-    // const estimatesMiscost = await EstimatesMiscost.all()
-    // const estimatesMaterial = await EstimatesMaterial.all()
-    if(auth.user === null){
-      return response.redirect('/')
-       }
-    else{
-      //,estimatesMaterial: estimatesMaterial.toJSON()
-      return view.render('estimates.index', { estimates: estimates.toJSON() })
+    const estimates = await Estimate.query().paginate(request.input('page'), 20)
+    return view.render('estimates.index', { estimates: estimates })
+  }
 
-    }
+  async home({ response }) {
+    return response.redirect('/estimates')
   }
 
   /**
@@ -55,28 +50,31 @@ class EstimateController {
    */
   async store ({ request, response, session }) {
     // Add logic here for saving the estimate
-      const estimate = new Estimate()
-      const material = new Material()
-      estimate.job_name = request.input('job_name')
-      estimate.location = request.input('location')
-      estimate.num_of_sqft = request.input('num_of_sqft')
-      estimate.num_of_days = request.input('num_of_days')
-      estimate.hours_worked_per_day = request.input('hours_worked_per_day')
-      estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
-      estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
-      estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
-      estimate.food_dollars_per_day = request.input('food_dollars_per_day')
-      estimate.num_of_vehicles = request.input('num_of_vehicles')
-      estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
-      estimate.dollars_per_mile = request.input('dollars_per_mile')
-      estimate.multiplier = request.input('multiplier')
-      
-      material.product = request.input('product')
-      material.unit_cost = request.input('unit_cost')
-      material.coverage_area = request.input('coverage_area')
-      
-      await estimate.save();
-      await material.save();
+    return request.body.toJSON()
+    const estimate = new Estimate()
+    // const material = new Material()
+    estimate.job_name = request.input('job_name')
+    estimate.location = request.input('location')
+    // estimate.num_of_sqft = request.input('num_of_sqft')
+    // estimate.num_of_days = request.input('num_of_days')
+    // estimate.hours_worked_per_day = request.input('hours_worked_per_day')
+    // estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
+    // estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
+    // estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
+    // estimate.food_dollars_per_day = request.input('food_dollars_per_day')
+    // estimate.num_of_vehicles = request.input('num_of_vehicles')
+    // estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
+    // estimate.dollars_per_mile = request.input('dollars_per_mile')
+    // estimate.multiplier = request.input('multiplier')
+    
+    material.product = request.input('product')
+    material.unit_cost = request.input('unit_cost')
+    material.coverage_area = request.input('coverage_area')
+    
+    estimate.save();
+    return  false
+    console.log(request)
+      // await material.save();
 
       session.flash({ notification: 'Estimate added!' })
       return response.redirect('/estimates')

@@ -27,6 +27,7 @@
     "@adonisjs/session": "^1.0.27",
     "@adonisjs/shield": "^1.0.8",
     "mysql": "^2.16.0",
+    "pagination": "^0.4.6",
     "sqlite3": "^4.0.4"
   },
   "devDependencies": {},
