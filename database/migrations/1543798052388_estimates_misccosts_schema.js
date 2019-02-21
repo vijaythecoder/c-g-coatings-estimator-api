@@ -8,7 +8,7 @@ class EstimatesMisccostsSchema extends Schema {
     this.create('estimates_misccosts', (table) => {
       table.increments()
       table.integer('estimate_id').unsigned().references('id').inTable('estimates')
-      table.integer('misc_id').unsigned().references('id').inTable('materials')
+      table.integer('misc_id').unsigned().references('id').inTable('miscellaneous_costs')
       table.timestamps()
     })
   }
