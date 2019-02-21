@@ -29,12 +29,18 @@
                         <td>No.of Days</td>
                         <td> {{ estimate.num_of_days }}</td>
                     </tr>
-
                     <tr> 
-                        <td>Hours worked per day</td>
+                            <td>No.of People</td>
+                            <td> {{ estimate.num_of_people }}</td>
+                        </tr>
+                    <tr> 
+                        <td >Hours worked per day</td>
                         <td> {{ estimate.hours_worked_per_day }}</td>
                     </tr>
-
+                    <tr>
+                        <td style="font-size:123%"><b>Total labor cost</b></td>
+                        <td><b>{{ estimate.hours_worked_per_day*estimate.num_of_days }} $</b></td>
+                    </tr>
                     <tr> 
                         <td>No.of Hotel Rooms</td>
                         <td> {{ estimate.num_of_hotel_rooms }}</td>
@@ -49,11 +55,20 @@
                         <td>Hotel Dollars per Night</td>
                         <td> {{ estimate.hotel_dollars_per_night }}</td>
                     </tr>
+                    <tr>
+                            <td style="font-size:123%;"><b>Total Hotel cost</b></td>
+                            <td><b>{{  estimate.num_of_hotel_rooms*estimate.hotel_dollars_per_night*estimate.num_of_hotel_nights }} $</b></td>
+                        </tr>
 
                     <tr> 
                         <td>Food Dollars per day</td>
                         <td> {{ estimate.food_dollars_per_day }}</td>
                     </tr>
+     
+                    <tr> 
+                            <td style="font-size:123%;"><b>Total Food Cost</b></td>
+                            <td> <b>{{ estimate.food_dollars_per_day*estimate.num_of_days }} $</b></td>
+                        </tr>
 
                     <tr> 
                         <td>No.of Vehicles</td>
@@ -69,7 +84,10 @@
                         <td>Dollars per mile</td>
                         <td> {{ estimate.dollars_per_mile }}</td>
                     </tr>
-
+                    <tr>
+                            <td style="font-size:123%;"><b>Total Vehicle cost</b></td>
+                            <td><b>{{   estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles }}$</b></td>
+                        </tr>
                     <tr> 
                         <td>Multiplier</td>
                         <td> {{ estimate.multiplier }}</td>
@@ -77,7 +95,10 @@
                 </tbody>
             </table>
 
-            <h1 class="title">Materials {{ material.id }}</h1>
+            
+
+
+            <div class="box"><h4 class="title"> Material </h4></div>
             <table class="table table-bordered">
                 <tbody>
 
@@ -98,5 +119,4 @@
                 </tbody>
             </table>
     </div>
-    Show estimate in table
 @endsection 
