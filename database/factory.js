@@ -29,6 +29,7 @@ Factory.blueprint('App/Models/Estimate', async (faker) => {
     location: faker.name(),
     num_of_sqft: faker.integer({ min: 1, max: 100000 }),
     num_of_days: faker.integer({ min: 1, max: 365 }),
+    num_of_people :  faker.integer({ min: 1, max: 100 }),
     hours_worked_per_day: faker.integer({ min: 1, max: 24 }),
     num_of_hotel_rooms : faker.integer({ min: 1, max: 100 }),
     num_of_hotel_nights :faker.integer({ min: 1, max: 100 }),

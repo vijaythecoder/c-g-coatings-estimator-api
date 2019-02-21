@@ -16,7 +16,7 @@ const Factory = use('Factory')
 
 class EstimateSeeder {
   async run () {
-    await Factory.model('App/Models/Estimate').createMany(100)
+    await Factory.model('App/Models/Estimate').createMany(50)
     // const estimates = await Database.table('Estimates')
     // console.log(estimates)
     
