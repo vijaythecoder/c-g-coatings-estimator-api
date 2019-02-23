@@ -52,7 +52,7 @@ class EstimateController {
   async store ({ request, response, session }) {
     // Add logic here for saving the estimate
     return request.body.toJSON()
-    const estimate = new Estimate()
+    //const estimate = new Estimate()
     // const material = new Material()
     // estimate.job_name = request.input('job_name')
     // estimate.location = request.input('location')
