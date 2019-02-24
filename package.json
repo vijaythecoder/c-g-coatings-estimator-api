@@ -29,7 +29,9 @@
     "@adonisjs/validator": "^5.0.6",
     "mysql": "^2.16.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@fortawesome/fontawesome-pro": "^5.7.2"
+  },
   "autoload": {
     "App": "./app"
   }
