@@ -33,16 +33,19 @@
                     {{ estimate.job_name }}
                 </td>
                 <td class="text-center">
-                    <a href="{{ '/estimates/' + estimate.id }}" class="btn btn-primary">View</a>
+                    <a href="{{ '/estimates/' + estimate.id }}" class="btn btn-info"><i class="fa fa-list" style="font-size: 16px;
+                        padding-top: 5px;"></i> View</a>
                 </td>
                 <td class="text-center">
                    
-                    <a href="{{ '/estimates/' + estimate.id + '/edit' }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ '/estimates/' + estimate.id + '/edit' }}" class="btn btn-primary"><i class="fa fa-edit" style="font-size: 16px;
+                        padding-top: 5px;"></i> Edit</a>
                 </td>
                 <td class="text-center">
                     <form action="{{ 'estimates/' + estimate.id + '?_method=DELETE' }}" method="POST">
                         {{ csrfField() }}
-                        <button class="button is-danger" type="submit">Delete</button>
+                        <button class="button is-danger" type="submit"><i class="fa fa-trash" style="font-size: 16px;
+                            padding-right: 5px;"></i> Delete</button>
                     </form>                    
                 </td>
             </tr>

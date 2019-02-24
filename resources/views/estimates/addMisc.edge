@@ -1,0 +1,38 @@
+@layout('master')
+
+@section('content')
+    <div class="box">
+            <div class="float-right">
+                <a href="{{ route('/estimates') }}">
+                All Estimates
+              </a>
+            </div>
+        <h1 class="title">Add Miscellaneous Cost</h1>
+        <form action="/add-misc/{{ estimate_id }}" method="POST">
+            {{ csrfField() }}
+          
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="desc"><span class="text-danger">*</span> Cost Description</label>
+                        <input type="string" class="form-control" id="desc" name="desc" value="{{ material.desc ? material.desc : '' }}" required>
+                        {{ elIf('<span class="text-danger">$self</span>', getErrorFor('desc'), hasErrorFor('desc')) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dollars"><span class="text-danger">*</span> Price</label>
+                        <input type="number" class="form-control" id="dollars" name="dollars" value="{{ material.dollars ? material.dollars : '' }}">
+                        {{ elIf('<span class="text-danger">$self</span>', getErrorFor('dollars'), hasErrorFor('dollars')) }}
+                        <input type="hidden" class="form-control" name="id" value="{{ estimate_id }}">
+                    </div>
+                </div>
+               
+            </div>  
+                  
+            <div class="form-group">
+                <button type="submit" class="button is-success">Add cost</button>
+            </div>
+        </form>
+    </div>
+@endsection

@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| EstimatesMisccostSeeder
+| EstimateSeeder
 |--------------------------------------------------------------------------
 |
 | Make use of the Factory instance to seed database with dummy data or
@@ -12,10 +12,15 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory')
+// const Database = use('Database')
 
-class EstimatesMisccostSeeder {
+class EstimateSeeder {
   async run () {
+    await Factory.model('App/Models/Estimate').createMany(100)
+    // const estimates = await Database.table('Estimates')
+    // console.log(estimates)
+    
   }
 }
 
-module.exports = EstimatesMisccostSeeder
+module.exports = EstimateSeeder

@@ -5,7 +5,9 @@
  */
 const Estimate = use('App/Models/Estimate')
 const Material = use('App/Models/Material')
-var pagination = require('pagination');
+const MiscCost = use('App/Models/MiscCost')
+const { validateAll } = use('Validator')
+// var pagination = require('pagination');
 
 class EstimateController {
   /**
@@ -18,7 +20,6 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async index ({ auth, request, response, view }) {
-    console.log("inside index method ")
     const estimates = await Estimate.query().paginate(request.input('page'), 20)
     return view.render('estimates.index', { estimates: estimates })
   }
@@ -50,33 +51,42 @@ class EstimateController {
    * @param {Response} ctx.response
    */
   async store ({ request, response, session }) {
+    
+    //Validating the estimate
+    const validation = await validateAll(request.all(), Estimate.rules, Estimate.messages)
+
+    if (validation.fails()) {
+      session
+        .withErrors(validation.messages())
+        session.flash({ notification: 'Fix the validation errors!' })
+      return response.redirect('back')
+    }
+
     // Add logic here for saving the estimate
-    return request.body.toJSON()
     const estimate = new Estimate()
-    // const material = new Material()
+    
     estimate.job_name = request.input('job_name')
     estimate.location = request.input('location')
-    // estimate.num_of_sqft = request.input('num_of_sqft')
-    // estimate.num_of_days = request.input('num_of_days')
-    // estimate.hours_worked_per_day = request.input('hours_worked_per_day')
-    // estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
-    // estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
-    // estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
-    // estimate.food_dollars_per_day = request.input('food_dollars_per_day')
-    // estimate.num_of_vehicles = request.input('num_of_vehicles')
-    // estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
-    // estimate.dollars_per_mile = request.input('dollars_per_mile')
-    // estimate.multiplier = request.input('multiplier')
-    
+    estimate.num_of_sqft = request.input('num_of_sqft')
+    estimate.num_of_days = request.input('num_of_days')
+    estimate.hours_worked_per_day = request.input('hours_worked_per_day')
+    estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
+    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
+    estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
+    estimate.food_dollars_per_day = request.input('food_dollars_per_day')
+    estimate.num_of_vehicles = request.input('num_of_vehicles')
+    estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
+    estimate.dollars_per_mile = request.input('dollars_per_mile')
+    estimate.multiplier = request.input('multiplier')
+    await estimate.save();
+
+    const material = new Material()
     material.product = request.input('product')
     material.unit_cost = request.input('unit_cost')
     material.coverage_area = request.input('coverage_area')
     
-    estimate.save();
-    return  false
-    console.log(request)
-      // await material.save();
-
+    await estimate.materials().saveMany([material])
+      
       session.flash({ notification: 'Estimate added!' })
       return response.redirect('/estimates')
   }
@@ -90,11 +100,11 @@ class EstimateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({params, request, response, view }) {
-  
+  async show ({params, view }) {
     const estimate = await Estimate.find(params.id)
-    const material = await Material.find(params.id)
-    return view.render('estimates.show', { estimate: estimate.toJSON(),material: material.toJSON() })
+    const materials = await estimate.materials().fetch()
+    const miscCosts = await estimate.miscellaneous().fetch()
+    return view.render('estimates.show', { estimate: estimate.toJSON(), materials: materials.toJSON(), miscCosts: miscCosts.toJSON() })
 }
 
   /**
@@ -106,17 +116,25 @@ class EstimateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async edit ({ params, request, response, view }) {
+  async edit ({ params, view }) {
      //edit page of the estimates.
     
      console.log('edit');
      const estimate = await Estimate.find(params.id)
-     const material = await Material.find(params.id)
-     return view.render('estimates.edit', { estimate: estimate.toJSON(),material: material.toJSON()})
-   
-
- 
+     const materials = await estimate.materials().fetch()
+     const miscCosts = await estimate.miscellaneous().fetch()
+     return view.render('estimates.edit', { estimate: estimate.toJSON(),materials: materials.toJSON(), miscCosts: miscCosts.toJSON()})
   }
+
+  async duplicate ({ params, request, response, view }) {
+    //Duplicate page of the estimates.
+   
+    const estimate = await Estimate.find(params.id)
+    return view.render('estimates.duplicate', { estimate: estimate.toJSON()})
+  
+
+
+ }
   /**
    * Update estimate details.
    * PUT or PATCH estimates/:id
@@ -126,9 +144,20 @@ class EstimateController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response, session }) {
+    
+    console.log(request.all())
+    
+    //Validating the estimate
+    const validation = await validateAll(request.all(), Estimate.updateRules(params.id), Estimate.messages)
+    
+    if (validation.fails()) {
+      session
+        .withErrors(validation.messages())
+      return response.redirect('back')
+    }
+    
     const estimate = await Estimate.find(params.id)
-    const material = await Material.find(params.id)
-   
+    
    estimate.job_name = request.input('job_name')
    estimate.location = request.input('location')
    estimate.num_of_sqft = request.input('num_of_sqft')
@@ -142,15 +171,36 @@ class EstimateController {
    estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
    estimate.dollars_per_mile = request.input('dollars_per_mile')
    estimate.multiplier = request.input('multiplier')
-   
-
-   material.product = request.input('product')
-   material.unit_cost = request.input('unit_cost')
-   material.coverage_area = request.input('coverage_area')
-   
    await estimate.save();
-   await material.save();
-   session.flash({ notification: 'Estimate updated! Materials updated' })
+
+   const material = new Material()
+
+   if(typeof request.input('material') != "undefined") {
+      if(Object.keys(request.input('material')).length) {
+        for(let i = 0; i < Object.keys(request.input('material')).length; i++){
+          
+        }
+      }
+    }
+    if(typeof request.input('miscCost')!= "undefined") {
+      if(request.input('miscCost').length) {
+
+      }
+    }
+   
+    const material = new Material()
+    
+    material.product = request.input('product')
+    material.unit_cost = request.input('unit_cost')
+    material.coverage_area = request.input('coverage_area')
+    
+    // await estimate.materials().saveMany([material])
+
+  
+  //  const miscCost = await MiscCost.find(params.id)
+
+   
+   session.flash({ notification: 'Estimate, materials, miscellaneous costs are updated' })
    return response.redirect('/estimates')
     // update estimate 
   }
@@ -169,7 +219,63 @@ class EstimateController {
     await estimate.delete()
     await material.delete()
     session.flash({ notification: 'Estimate and Material Deleted!' })
-    return response.redirect('/estimates')  }
+    return response.redirect('/estimates')  
+  }
+
+  async addMaterial ({ params, view }) {
+    return view.render('estimates.addMaterial', { estimate_id: params.id})
+  }
+
+  async saveMaterial ({ request, response, session }) {
+    //Validating the material
+    const validation = await validateAll(request.all(), Material.rules, Material.messages)
+
+    if (validation.fails()) {
+      session
+        .withErrors(validation.messages())
+        session.flash({ notification: 'Fix the validation errors!' })
+      return response.redirect('back')
+    }
+
+    // Add logic here for saving the material
+    const material = new Material()
+    material.product = request.input('product')
+   material.unit_cost = request.input('unit_cost')
+   material.coverage_area = request.input('coverage_area')
+   material.estimate_id = request.input('id')
+
+   await material.save();
+    session.flash({ notification: 'Material added!' })
+    return response.redirect('/estimates/' + request.input('id'))
+  }
+
+  async addMisc ({ params, view }) {
+    return view.render('estimates.addMisc', { estimate_id: params.id})
+  }
+
+  async saveMisc ({ request, response, session }) {
+    //Validating the miscellaneous cost
+    const validation = await validateAll(request.all(), MiscCost.rules, MiscCost.messages)
+
+    if (validation.fails()) {
+      session
+        .withErrors(validation.messages())
+        session.flash({ notification: 'Fix the validation errors!' })
+      return response.redirect('back')
+    }
+
+    // Add logic here for saving the miscellaneous cost
+    const misc = new MiscCost()
+    misc.desc = request.input('desc')
+   misc.dollars = request.input('dollars')
+   misc.estimate_id = request.input('id')
+
+   await misc.save();
+    session.flash({ notification: 'Miscellaneous cost added!' })
+    return response.redirect('/estimates/' + request.input('id'))
+  }
+
 }
+
 
 module.exports = EstimateController

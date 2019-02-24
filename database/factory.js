@@ -45,17 +45,18 @@ Factory.blueprint('App/Models/Estimate', async (faker) => {
 
 Factory.blueprint('App/Models/Material', async (faker) => {
   return {
+    estimate_id: faker.integer({ min: 1, max: 100 }),
     product: faker.name(),
     unit_cost: faker.integer({ min: 100, max: 1000 }),
     coverage_area: faker.integer({ min: 1, max: 500 })
   }
   })
 
-  Factory.blueprint('App/Models/MiscellaneousCost', async (faker) => {
-    return {
-      desc: faker.name(),
-      // desc: faker.integer({ min: 1, max: 500 })  ,
-      dollars: faker.integer({ min: 100, max: 1000 })
-          
-    }
+Factory.blueprint('App/Models/MiscCost', async (faker) => {
+  return {
+    estimate_id: faker.integer({ min: 1, max: 100 }),
+    desc: faker.name(),
+    dollars: faker.integer({ min: 100, max: 1000 })
+        
+  }
 })

@@ -15,7 +15,7 @@ const Factory = use('Factory')
 
 class MiscellaneousCostSeeder {
   async run () {
-    await Factory.model('App/Models/MiscellaneousCost').createMany(50)
+    await Factory.model('App/Models/MiscCost').createMany(50)
   }
 }
 

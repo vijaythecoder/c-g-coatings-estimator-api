@@ -2,15 +2,16 @@
 
 @section('content')
     <div class="box">
-            <div class="float-right"><a href="{{ route('/estimates') }}">
+            <div class="float-right">
+                <a href="{{ route('/estimates') }}">
                 All Estimates
-              </a></div>
+              </a>
+            </div>
         <h1 class="title">Create New Estimate</h1>
-        <form action="/estimates" method="post">
+        <form action="{{ route('/estimates') }}" method="POST">
             {{ csrfField() }}
-
             @include('estimates.fields')
-            @include('estimates.materials')
+           
             <div class="form-group">
                 <button type="submit" class="button is-success">Create Estimate</button>
             </div>

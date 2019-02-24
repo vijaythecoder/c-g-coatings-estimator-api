@@ -1,0 +1,43 @@
+@layout('master')
+
+@section('content')
+    <div class="box">
+            <div class="float-right">
+                <a href="{{ route('/estimates') }}">
+                All Estimates
+              </a>
+            </div>
+        <h1 class="title">Add Material</h1>
+        <form action="/add-material/{{ estimate_id }}" method="POST">
+            {{ csrfField() }}
+          
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="product"><span class="text-danger">*</span> Product</label>
+                        <input type="text" class="form-control" id="product" name="product" value="{{ old('product') }}">
+                        {{ elIf('<span class="text-danger">$self</span>', getErrorFor('product'), hasErrorFor('product')) }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="unit_cost"><span class="text-danger">*</span> Unit Cost</label>
+                        <input type="text" class="form-control" id="unit_cost" name="unit_cost" value="{{ old('unit_cost') }}">
+                        {{ elIf('<span class="text-danger">$self</span>', getErrorFor('unit_cost'), hasErrorFor('unit_cost')) }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="coverage_area">Num of Sqft</label>
+                        <input type="number" class="form-control" id="coverage_area" name="coverage_area" value="{{ old('coverage_area') }}">
+                        <input type="hidden" class="form-control" name="id" value="{{ estimate_id }}">
+                    </div>
+                </div>
+            </div>  
+                  
+            <div class="form-group">
+                <button type="submit" class="button is-success">Add Material</button>
+            </div>
+        </form>
+    </div>
+@endsection
