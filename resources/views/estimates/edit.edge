@@ -7,12 +7,65 @@
                 All Estimates
               </a>
             </div>
-        <h1 class="title">Create New Estimate</h1>
-        <form action="{{ '/estimates/' + estimate.id + '?_method=PUT' }}" method="post">
+        <h1 class="title">Edit Estimate: {{ estimate.id }}</h1>
+        <form action="/estimates/{{ estimate.id }}?_method=PUT" method="POST">
             {{ csrfField() }}
             @include('estimates.fields')
-           
-              @include('estimates.materials')  
+           @if(materials.length)
+            <h2><b>Associated Materials</b></h2>
+            <hr>
+            @each(material in materials)
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="product"><span class="text-danger">*</span> Product</label>
+                        <input type="hidden" class="form-control" name="material[{{ material.id }}][id]" value="{{ material.id }}">
+                        <input type="text" class="form-control" id="product" name="material[{{ material.id }}][product]" value="{{ material.product ? material.product : '' }}">
+                        {{ elIf('<span class="text-danger">$self</span>', getErrorFor('product'), hasErrorFor('product')) }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="unit_cost"><span class="text-danger">*</span> Unit Cost</label>
+                        {{ elIf('<span class="text-danger">$self</span>', getErrorFor('unit_cost'), hasErrorFor('unit_cost')) }}
+                        <input type="number" class="form-control" id="unit_cost" name="material[{{ material.id }}][unit_cost]" value="{{ material.unit_cost ? material.unit_cost : '' }}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="coverage_area">Num of Sqft</label>
+                        <input type="number" class="form-control" id="coverage_area" name="material[{{ material.id }}][coverage_area]" value="{{ material.coverage_area ? material.coverage_area : null }}">
+                    </div>
+                </div>
+            </div>  
+                  
+            @endeach
+            @endif
+
+            @if(miscCosts.length)
+            <h2><b>Associated Miscellaneous costs</b></h2>
+            <hr>
+            @each(miscCost in miscCosts)
+
+            <div class="row">
+                <div class="col-md-6">
+                    
+                    <div class="form-group">
+                        <label for="desc"><span class="text-danger">*</span> Name of the cost</label>
+                        <input type="string" class="form-control" id="desc" name="miscCost[{{ miscCost.id }}][desc]" value="{{ miscCost.desc ? miscCost.desc : '' }}" required>
+                        <input type="hidden" value="{{ miscCost.id }}" name="miscCost[{{ miscCost.id }}][id]">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dollars"><span class="text-danger">*</span> Price</label>
+                        <input type="string" class="form-control" id="dollars" name="miscCost[{{ miscCost.id }}][dollars]" value="{{ miscCost.dollars ? miscCost.dollars : '' }}">
+                    </div>
+                </div>
+            </div>  
+                  
+            @endeach
+            @endif
             <div class="form-group">
                 <button type="submit" class="button is-success">Update Estimate</button>
             </div>

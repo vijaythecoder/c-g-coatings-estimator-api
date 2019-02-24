@@ -7,6 +7,7 @@ class MaterialsSchema extends Schema {
   up () {
     this.create('materials', (table) => {
       table.increments()
+      table.integer('estimate_id').unsigned().references('id').inTable('estimates')
       table.string('product').unique()
       table.integer('unit_cost')
       table.integer('coverage_area')

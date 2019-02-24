@@ -15,14 +15,19 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
-const Database = use('Database')
 
-// Route.on('/').render('welcome')
 Route.on('/').render('login')
+Route.on('/login').render('login')
 
 
 // Route.resource('/estimates', 'EstimateController').middleware(['auth'])
 Route.resource('/estimates', 'EstimateController')
+Route.put('estimates/:id', 'EstimateController.update')
+Route.get('/estimates/:id/duplicate', 'EstimateController.duplicate')
+Route.get('/add-material/:id', 'EstimateController.addMaterial')
+Route.post('/add-material/:id', 'EstimateController.saveMaterial')
+Route.get('/add-misc/:id', 'EstimateController.addMisc')
+Route.post('/add-misc/:id', 'EstimateController.saveMisc')
 Route.post('login', 'UserController.login')
 
 Route.resource('/users','UserController')
@@ -31,7 +36,7 @@ Route.get('/contact', 'ViewController.contact')
 
 Route.resource('/UserController', 'UserController')
 
-Route.resource('/estimates', 'EstimateController')
+// Route.resource('/estimates', 'EstimateController')
 Route.get('/posts', async () => {
     return await Database.table('samples').select('*')
   })

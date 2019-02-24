@@ -1,7 +1,6 @@
 @layout('master')
 
 @section('content')
-List  estimates
 <div class="box">
     <div class="float-right"><a href="{{ route('/estimates/create') }}">
             Create Estimate
@@ -13,7 +12,7 @@ List  estimates
             {{ old('notification') }}
         </div>
     @endif
-    @if(estimates.length)  
+    @if(estimates.rows.length)  
     <table class="table is-bordered is-striped is-narrow is-fullwidth">
         <thead>
           <tr>
@@ -25,41 +24,39 @@ List  estimates
           </tr>
         </thead>
         <tbody>
-            @each(estimate in estimates)
+            @each(estimate in estimates.rows)
             <tr>
                 <td>
-                  
-                    {{ ($loop.index + 1) }}
+                    {{ estimate.id }}
                 </td>
                 <td>
                     {{ estimate.job_name }}
                 </td>
                 <td class="text-center">
-                    <a href="{{ '/estimates/' + estimate.id }}" class="btn btn-primary">View</a>
+                    <a href="{{ '/estimates/' + estimate.id }}" class="btn btn-info"><i class="fa fa-list" style="font-size: 16px;
+                        padding-top: 5px;"></i> View</a>
                 </td>
                 <td class="text-center">
                    
-                    <a href="{{ '/estimates/' + estimate.id + '/edit' }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ '/estimates/' + estimate.id + '/edit' }}" class="btn btn-primary"><i class="fa fa-edit" style="font-size: 16px;
+                        padding-top: 5px;"></i> Edit</a>
                 </td>
                 <td class="text-center">
                     <form action="{{ 'estimates/' + estimate.id + '?_method=DELETE' }}" method="POST">
                         {{ csrfField() }}
-                        <button class="button is-danger" type="submit">Delete</button>
+                        <button class="button is-danger" type="submit"><i class="fa fa-trash" style="font-size: 16px;
+                            padding-right: 5px;"></i> Delete</button>
                     </form>                    
                 </td>
             </tr>
             @endeach
         </tbody>
       </table>
-      <table>
-          <p>new estimates material</p>
-      </table>
-
-
-      
       @else
         <div class="alert alert-warning">No estimates created yet!</div>
       @endif
                
 </div>
+{{{ pagination }}}
+
 @endsection

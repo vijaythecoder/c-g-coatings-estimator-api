@@ -1,28 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3 d-flex flex-row p-2">
-        <a class="navbar-brand" href="/">C&G Coatings </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>     
-        <div class="collapse float-right navbar-collapse  d-flex " id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/estimates">Estimates <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/contact">Contact <span class="sr-only">(current)</span></a>
-            </li>
-          </ul>
-            <ul  class="navbar-nav ">   
-            <li class="nav-item active">
-                <a class="nav-link" href="/register">Register <span class="sr-only">(current)</span></a>
-            </li>
-            @loggedIn
-            <li class="nav-item active navbar-right ">
-              <a class="nav-link" href="/logout">Logout <span class="sr-only">(current)</span></a>
-            </li>
-            @endloggedIn
-          </ul>
-            {{--  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>  --}}
-          
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        Estimator
+      </a>
+  
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="/estimates">
+          Home
+        </a>
+  
+        <a class="navbar-item" href="/contact">
+          Contact
+        </a>
+  
+  
+        
+      </div>
+      <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+                @loggedIn
+                <a class="button is-primary" href="/logout">
+                    <strong>Logout</strong>
+                  </a>
+                @else
+              <a class="button is-light" href="/login">
+                Log in
+              </a>
+              @endloggedIn
+            </div>
+          </div>
         </div>
-</nav>
+      
+    </div>
+  </nav>

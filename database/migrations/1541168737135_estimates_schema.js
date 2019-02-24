@@ -9,6 +9,7 @@ class EstimatesSchema extends Schema {
       table.increments()
       table.string('job_name').unique()
       table.string('location')
+      table.integer('num_of_people').defaultTo(10)      
       table.integer('num_of_sqft').defaultTo(10)
       table.integer('num_of_days').defaultTo(1)
       table.integer('hours_worked_per_day')

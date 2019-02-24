@@ -1,52 +1,59 @@
 <div class="form-group">
-    <label for="name">Job Name</label>
-    <input type="string" class="form-control" id="name" name="job_name" value="{{ estimate.job_name ? estimate.job_name : '' }}" required>
+    <label for="name"><span class="text-danger">*</span>Job Name</label>
+    <input type="string" class="form-control" id="name" name="job_name" value="{{ estimate.job_name ? estimate.job_name : '' }}">
+    {{ elIf('<span class="text-danger">$self</span>', getErrorFor('job_name'), hasErrorFor('job_name')) }}
 </div>
 <div class="form-group">
     <label for="location">Location</label>
     <input type="string" class="form-control" id="location" name="location" value="{{ estimate.location ? estimate.location : '' }}">
 </div>
 <div class="form-group">
-    <label for="'num_of_sqft">'Num of Sqft</label>
-    <input type="number" class="form-control" id="'num_of_sqft" name="num_of_sqft" value="{{ estimate.num_of_sqft ? estimate.num_of_sqft : '' }}">
+    <label for="'num_of_sqft">Num of Sqft</label>
+    <input type="number" class="form-control" id="'num_of_sqft" name="num_of_sqft" value="{{ estimate.num_of_sqft ? estimate.num_of_sqft : null }}">
 </div>
 <div class="form-group">
     <label for="num_of_days">No.of Days</label>
-    <input type="number" class="form-control" id="num_of_days" name="num_of_days" value="{{ estimate.num_of_days ? estimate.num_of_days : '' }}" required>
+    <input type="number" class="form-control" id="num_of_days" name="num_of_days" value="{{ estimate.num_of_days ? estimate.num_of_days : null }}">
+    {{ elIf('<span class="text-danger">$self</span>', getErrorFor('num_of_days'), hasErrorFor('num_of_days')) }}
+</div>
+<div class="form-group">
+    <label for="num_of_people">No.of People</label>
+    <input type="number" class="form-control" id="num_of_people" name="num_of_people" value="{{ estimate.num_of_people ? estimate.num_of_people : null }}">
+    {{ elIf('<span class="text-danger">$self</span>', getErrorFor('num_of_people'), hasErrorFor('num_of_people')) }}
 </div>
 <div class="form-group">
     <label for="hours_worked_per_day">Hours worked per day</label>
-    <input type="string" class="form-control" id="hours_worked_per_day" name="hours_worked_per_day" value="{{ estimate.hours_worked_per_day ? estimate.hours_worked_per_day : '' }}">
+    <input type="number" class="form-control" id="hours_worked_per_day" name="hours_worked_per_day" value="{{ estimate.hours_worked_per_day ? estimate.hours_worked_per_day : null }}">
 </div>
 <div class="form-group">
     <label for="num_of_hotel_rooms">No.of Hotel Rooms</label>
-    <input type="number" class="form-control" id="num_of_hotel_rooms" name="num_of_hotel_rooms" value="{{ estimate.num_of_hotel_rooms ? estimate.num_of_hotel_rooms : '' }}">
+    <input type="number" class="form-control" id="num_of_hotel_rooms" name="num_of_hotel_rooms" value="{{ estimate.num_of_hotel_rooms ? estimate.num_of_hotel_rooms : null }}">
 </div>
 <div class="form-group">
     <label for="num_of_hotel_nights">No.of Hotel Nights</label>
-    <input type="number" class="form-control" id="num_of_hotel_nights" name="num_of_hotel_nights" value="{{ estimate.num_of_hotel_nights ? estimate.num_of_hotel_nights : '' }}">
+    <input type="number" class="form-control" id="num_of_hotel_nights" name="num_of_hotel_nights" value="{{ estimate.num_of_hotel_nights ? estimate.num_of_hotel_nights : null }}">
 </div>
 <div class="form-group">
     <label for="hotel_dollars_per_night">Hotel Dollars per Night</label>
-    <input type="number" class="form-control" id="hotel_dollars_per_night" name="hotel_dollars_per_night" value="{{ estimate.hotel_dollars_per_night ? estimate.hotel_dollars_per_night : '' }}">
+    <input type="number" class="form-control" id="hotel_dollars_per_night" name="hotel_dollars_per_night" value="{{ estimate.hotel_dollars_per_night ? estimate.hotel_dollars_per_night : null }}">
 </div>
 <div class="form-group">
     <label for="food_dollars_per_day">Food Dollars per day </label>
-    <input type="number" class="form-control" id="food_dollars_per_day" name="food_dollars_per_day" value="{{ estimate.food_dollars_per_day ? estimate.food_dollars_per_day : '' }}">
+    <input type="number" class="form-control" id="food_dollars_per_day" name="food_dollars_per_day" value="{{ estimate.food_dollars_per_day ? estimate.food_dollars_per_day : null }}">
 </div>
 <div class="form-group">
     <label for="num_of_vehicles">No.of Vehicles</label>
-    <input type="number" class="form-control" id="num_of_vehicles" name="num_of_vehicles" value="{{ estimate.num_of_vehicles ? estimate.num_of_vehicles : '' }}">
+    <input type="number" class="form-control" id="num_of_vehicles" name="num_of_vehicles" value="{{ estimate.num_of_vehicles ? estimate.num_of_vehicles : null }}">
 </div>
 <div class="form-group">
     <label for="num_of_miles_pervehicle">No.of Miles per Vehicle</label>
-    <input type="number" class="form-control" id="num_of_miles_pervehicle" name="num_of_miles_pervehicle" value="{{ estimate.num_of_miles_pervehicle ? estimate.num_of_miles_pervehicle : '' }}">
+    <input type="number" class="form-control" id="num_of_miles_pervehicle" name="num_of_miles_pervehicle" value="{{ estimate.num_of_miles_pervehicle ? estimate.num_of_miles_pervehicle : null }}">
 </div>
 <div class="form-group">
     <label for="dollars_per_mile">Dollars per Mile</label>
-    <input type="number" class="form-control" id="dollars_per_mile" name="dollars_per_mile" value="{{ estimate.dollars_per_mile ? estimate.dollars_per_mile : '' }}">
+    <input type="number" class="form-control" id="dollars_per_mile" name="dollars_per_mile" value="{{ estimate.dollars_per_mile ? estimate.dollars_per_mile : null }}">
 </div>
 <div class="form-group">
     <label for="multiplier">Multiplier</label>
-    <input type="number" class="form-control" id="multiplier" name="multiplier" value="{{ estimate.multiplier ? estimate.multiplier : '' }}">
+    <input type="number" class="form-control" id="multiplier" name="multiplier" value="{{ estimate.multiplier ? estimate.multiplier : null }}">
 </div>
