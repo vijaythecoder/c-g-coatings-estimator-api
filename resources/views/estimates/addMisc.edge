@@ -15,14 +15,19 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="desc"><span class="text-danger">*</span> Cost Description</label>
-                        <input type="string" class="form-control" id="desc" name="desc" value="{{ material.desc ? material.desc : '' }}" required>
+                        <input type="string" class="form-control" id="desc" name="desc" value="{{ material.desc ? material.desc : '' }}" placeholder="Description about the cost">
                         {{ elIf('<span class="text-danger">$self</span>', getErrorFor('desc'), hasErrorFor('desc')) }}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="dollars"><span class="text-danger">*</span> Price</label>
-                        <input type="number" class="form-control" id="dollars" name="dollars" value="{{ material.dollars ? material.dollars : '' }}">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">$</span>
+                            </div>
+                            <input type="number" class="form-control" aria-describedby="basic-addon1" id="dollars" name="dollars" placeholder="Enter price" value="{{ estimate.dollars ? estimate.dollars : null }}">
+                        </div>
                         {{ elIf('<span class="text-danger">$self</span>', getErrorFor('dollars'), hasErrorFor('dollars')) }}
                         <input type="hidden" class="form-control" name="id" value="{{ estimate_id }}">
                     </div>

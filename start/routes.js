@@ -32,7 +32,8 @@ Route.post('login', 'UserController.login')
 
 Route.resource('/users','UserController')
 
-Route.get('/contact', 'ViewController.contact')
+Route.get('/contact', 'EstimateController.contact')
+Route.post('/send-mail', 'EstimateController.sendMail')
 
 Route.resource('/UserController', 'UserController')
 

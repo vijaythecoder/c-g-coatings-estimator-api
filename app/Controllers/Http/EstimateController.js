@@ -6,6 +6,8 @@
 const Estimate = use('App/Models/Estimate')
 const Material = use('App/Models/Material')
 const MiscCost = use('App/Models/MiscCost')
+const Mail = use('Mail')
+
 const { validateAll } = use('Validator')
 // var pagination = require('pagination');
 
@@ -126,10 +128,11 @@ class EstimateController {
      return view.render('estimates.edit', { estimate: estimate.toJSON(),materials: materials.toJSON(), miscCosts: miscCosts.toJSON()})
   }
 
-  async duplicate ({ params, request, response, view }) {
+  async duplicate ({ params, view }) {
     //Duplicate page of the estimates.
    
     const estimate = await Estimate.find(params.id)
+    estimate.job_name = ''
     return view.render('estimates.duplicate', { estimate: estimate.toJSON()})
   
 
@@ -144,8 +147,6 @@ class EstimateController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response, session }) {
-    
-    console.log(request.all())
     
     //Validating the estimate
     const validation = await validateAll(request.all(), Estimate.updateRules(params.id), Estimate.messages)
@@ -173,32 +174,30 @@ class EstimateController {
    estimate.multiplier = request.input('multiplier')
    await estimate.save();
 
-   const material = new Material()
-
+   
    if(typeof request.input('material') != "undefined") {
-      if(Object.keys(request.input('material')).length) {
-        for(let i = 0; i < Object.keys(request.input('material')).length; i++){
-          
-        }
+     let obj = Object.keys(request.input('material'))
+     if(obj.length) {
+       let values = Object.values(request.input('material'))
+       for (let i of values) {
+        await Material.query().where('id', i.id)
+        .update({'product': i.product,
+                 'unit_cost': i.unit_cost,
+                 'coverage_area': i.coverage_area })
+       }
       }
     }
     if(typeof request.input('miscCost')!= "undefined") {
-      if(request.input('miscCost').length) {
-
+      let obj = Object.keys(request.input('miscCost'))
+     if(obj.length) {
+       let values = Object.values(request.input('miscCost'))
+       for (let i of values) {
+        await MiscCost.query().where('id', i.id)
+        .update({'desc': i.desc,
+                 'dollars': i.dollars })
+       }
       }
     }
-   
-    const material = new Material()
-    
-    material.product = request.input('product')
-    material.unit_cost = request.input('unit_cost')
-    material.coverage_area = request.input('coverage_area')
-    
-    // await estimate.materials().saveMany([material])
-
-  
-  //  const miscCost = await MiscCost.find(params.id)
-
    
    session.flash({ notification: 'Estimate, materials, miscellaneous costs are updated' })
    return response.redirect('/estimates')
@@ -215,17 +214,21 @@ class EstimateController {
    */
   async destroy ({ params, request, response, session }) {
     const estimate = await Estimate.find(params.id)
-    const material = await Material.find(params.id)
+    await estimate.materials().delete()
+    await estimate.miscellaneous().delete()
     await estimate.delete()
-    await material.delete()
     session.flash({ notification: 'Estimate and Material Deleted!' })
     return response.redirect('/estimates')  
   }
 
+  /* Show form to add a new material
+  */
   async addMaterial ({ params, view }) {
     return view.render('estimates.addMaterial', { estimate_id: params.id})
   }
 
+  /* Add new material for an associated estimate
+  */
   async saveMaterial ({ request, response, session }) {
     //Validating the material
     const validation = await validateAll(request.all(), Material.rules, Material.messages)
@@ -249,10 +252,14 @@ class EstimateController {
     return response.redirect('/estimates/' + request.input('id'))
   }
 
+  /* Show form to add a new material
+  */
   async addMisc ({ params, view }) {
     return view.render('estimates.addMisc', { estimate_id: params.id})
   }
 
+  /* Add new material for an associated estimate
+  */
   async saveMisc ({ request, response, session }) {
     //Validating the miscellaneous cost
     const validation = await validateAll(request.all(), MiscCost.rules, MiscCost.messages)
@@ -274,6 +281,25 @@ class EstimateController {
     session.flash({ notification: 'Miscellaneous cost added!' })
     return response.redirect('/estimates/' + request.input('id'))
   }
+
+  async contact ({ params, view }) {
+    return view.render('estimates.contact')
+  }
+
+   /* Send mail for contact page
+  */
+ async sendMail ({ request, response, session }) {
+   const data = request.all()
+   console.log(data)
+  await Mail.send('contact', data, (message) => {
+    message
+      .to('hello@vijaykumar.me')
+      .from(data.email)
+      .subject('support mail')
+  })
+  session.flash({ notification: 'Thanks for contacting us! We will get back to you soon!' })
+  return response.redirect('back')
+}
 
 }
 

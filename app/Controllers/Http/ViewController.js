@@ -19,6 +19,12 @@ class ViewController {
     async estimate( {view} ){
         return view.render('estimate')
     }
+
+    /* Send mail for contact page
+  */
+  async sendMail ({ request }) {
+    console.log(request.all())
+  }
 }
 
 module.exports = ViewController;

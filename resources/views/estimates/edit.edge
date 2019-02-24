@@ -21,14 +21,14 @@
                         <label for="product"><span class="text-danger">*</span> Product</label>
                         <input type="hidden" class="form-control" name="material[{{ material.id }}][id]" value="{{ material.id }}">
                         <input type="text" class="form-control" id="product" name="material[{{ material.id }}][product]" value="{{ material.product ? material.product : '' }}">
-                        {{ elIf('<span class="text-danger">$self</span>', getErrorFor('product'), hasErrorFor('product')) }}
+                        {{--  {{ elIf('<span class="text-danger">$self</span>', getErrorFor('product'), hasErrorFor('product')) }}  --}}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="unit_cost"><span class="text-danger">*</span> Unit Cost</label>
-                        {{ elIf('<span class="text-danger">$self</span>', getErrorFor('unit_cost'), hasErrorFor('unit_cost')) }}
-                        <input type="number" class="form-control" id="unit_cost" name="material[{{ material.id }}][unit_cost]" value="{{ material.unit_cost ? material.unit_cost : '' }}">
+                        {{--  {{ elIf('<span class="text-danger">$self</span>', getErrorFor('unit_cost'), hasErrorFor('unit_cost')) }}  --}}
+                        <input type="number" class="form-control" id="unit_cost" name="material[{{ material.id }}][unit_cost]" value="{{ material.unit_cost ? material.unit_cost : NULL }}">
                     </div>
                 </div>
                 <div class="col-md-4">

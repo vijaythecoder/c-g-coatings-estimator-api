@@ -18,7 +18,8 @@ static get rules () {
 
 static updateRules (id) {
   return {
-     product: `unique:materials,product,id,${id}`
+     product: `unique:materials,product,id,${id}`,
+    //  unit_cost: 'required'
   }
 }
 

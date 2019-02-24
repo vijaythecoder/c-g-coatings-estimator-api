@@ -17,7 +17,7 @@ static get rules () {
 
 static updateRules (id) {
   return {
-     desc: `unique:miscellaneous_costs,desc,id,${id}`,
+     desc: `required|unique:miscellaneous_costs,desc,id,${id}`,
      dollars: 'required'
   }
 }
