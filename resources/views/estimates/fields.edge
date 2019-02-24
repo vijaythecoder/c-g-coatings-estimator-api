@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label for="name">Job Name</label>
+    <label for="name"><span class="text-danger">*</span>Job Name</label>
     <input type="string" class="form-control" id="name" name="job_name" value="{{ estimate.job_name ? estimate.job_name : '' }}">
     {{ elIf('<span class="text-danger">$self</span>', getErrorFor('job_name'), hasErrorFor('job_name')) }}
 </div>

@@ -22,7 +22,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="unit_cost"><span class="text-danger">*</span> Unit Cost</label>
-                        <input type="text" class="form-control" id="unit_cost" name="unit_cost" value="{{ old('unit_cost') }}">
+                        <input type="number" class="form-control" id="unit_cost" name="unit_cost" value="{{ old('unit_cost') }}">
                         {{ elIf('<span class="text-danger">$self</span>', getErrorFor('unit_cost'), hasErrorFor('unit_cost')) }}
                     </div>
                 </div>

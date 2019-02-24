@@ -8,9 +8,7 @@
         <h1 class="title">Create New Estimate</h1>
         <form action="/estimates" method="post">
             {{ csrfField() }}
-
             @include('estimates.fields')
-            @include('estimates.materials')
             <div class="form-group">
                 <button type="submit" class="button is-success">Create Estimate</button>
             </div>
