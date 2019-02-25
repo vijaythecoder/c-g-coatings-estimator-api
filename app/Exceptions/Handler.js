@@ -25,24 +25,23 @@ class ExceptionHandler extends BaseExceptionHandler {
     if (error.name === 'ValidationException') {
       session.withErrors(error.messages).flashAll()
       await session.commit()
-      response.redirect('back')
-      return
+      return response.redirect('back')
     }
     if (error.name === 'InvalidSessionException'){
-      await session.commit()
       session.flash({ notification:' You need to login first' })   
+      await session.commit()
       return response.redirect('/login')
     }
 
     if (error.name === 'PasswordMisMatchException'){
-      await session.commit()
       session.flash({ notification:'Your password is invalid' }) 
+      await session.commit()
       return response.redirect('/login')
     }
 
     if (error.name === 'UserNotFoundException'){
-      await session.commit()
       session.flash({ notification:'Your email is not found' }) 
+      await session.commit()
       return response.redirect('/login')
     }
 

@@ -3,14 +3,11 @@
    {{--  <h1> {{ title }} </h1>  --}}
   
    @if(flashMessage('notification'))
-       <div class="notification is-success">
+       <div class="notification is-danger">
            {{ flashMessage('notification') }}
        </div>
    @endif
 
-   @if(flashMessage('notification'))
-  <span>{{ flashMessage('notification') }}</span>
-@endif
    <form method="POST" action="/login">
     {{ csrfField() }}
     <div class="field">
