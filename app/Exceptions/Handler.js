@@ -29,18 +29,20 @@ class ExceptionHandler extends BaseExceptionHandler {
       return
     }
     if (error.name === 'InvalidSessionException'){
+      await session.commit()
       session.flash({ notification:' You need to login first' })   
       return response.redirect('/login')
     }
 
     if (error.name === 'PasswordMisMatchException'){
+      await session.commit()
       session.flash({ notification:'Your password is invalid' }) 
       return response.redirect('/login')
     }
 
     if (error.name === 'UserNotFoundException'){
+      await session.commit()
       session.flash({ notification:'Your email is not found' }) 
-      console.log('user not found')
       return response.redirect('/login')
     }
 

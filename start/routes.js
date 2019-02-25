@@ -17,7 +17,7 @@
 const Route = use('Route')
 
 Route.on('/').render('login')
-Route.get('/login', 'UserController.showLogin')
+Route.get('/login', 'UserController.showLogin').middleware('guest')
 
 
 // Route.resource('/estimates', 'EstimateController').middleware(['auth'])

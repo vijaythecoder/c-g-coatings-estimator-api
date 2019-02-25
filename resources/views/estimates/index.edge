@@ -53,7 +53,7 @@
       </table>
       <nav aria-label="Page navigation example">
         <ul class="pagination" style="justify-content:center;">
-            @each(number in range(estimates.pages.lastPage - 1))
+            @each(number in range(estimates.pages.lastPage))
                 <li class="page-item"><a class="page-link" href="{{ '/estimates?page=' + (number + 1) }}">{{ number + 1 }}</a></li>
             @endeach
         </ul>
