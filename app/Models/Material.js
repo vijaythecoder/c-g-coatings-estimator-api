@@ -12,7 +12,7 @@ class Material extends Model {
 static get rules () {
   return {
     product: 'required|unique:materials,product',
-    unit_cost: 'required'
+    unit_cost: 'required|number|min:0'
   }
 }
 
