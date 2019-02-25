@@ -17,12 +17,12 @@
 const Route = use('Route')
 
 Route.on('/').render('login')
-Route.on('/login').render('login')
+Route.get('/login', 'UserController.showLogin')
 
 
 // Route.resource('/estimates', 'EstimateController').middleware(['auth'])
-Route.resource('/estimates', 'EstimateController')
-Route.put('estimates/:id', 'EstimateController.update')
+Route.resource('/estimates', 'EstimateController').middleware('auth')
+Route.put('estimates/:id', 'EstimateController.update').middleware('auth')
 Route.get('/estimates/:id/duplicate', 'EstimateController.duplicate')
 Route.get('/add-material/:id', 'EstimateController.addMaterial')
 Route.post('/add-material/:id', 'EstimateController.saveMaterial')

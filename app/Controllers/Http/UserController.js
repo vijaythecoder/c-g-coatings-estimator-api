@@ -20,6 +20,11 @@ class UserController {
         console.log("Inside userController Store")
     }
 
+    async showLogin({ view, request, response, session }) {
+      
+      return view.render('login')
+    }
+
     async login ({ request, auth, response, session }) {
         await auth.logout()
         const { email, password } = request.all()
