@@ -20,8 +20,8 @@ Route.on('/').render('login')
 Route.on('/login').render('login')
 
 
-// Route.resource('/estimates', 'EstimateController').middleware(['auth'])
-Route.resource('/estimates', 'EstimateController')
+Route.resource('/estimates', 'EstimateController').middleware(['auth'])
+// Route.resource('/estimates', 'EstimateController')
 Route.put('estimates/:id', 'EstimateController.update')
 Route.get('/estimates/:id/duplicate', 'EstimateController.duplicate')
 Route.get('/add-material/:id', 'EstimateController.addMaterial')

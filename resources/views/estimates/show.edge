@@ -31,12 +31,19 @@
                         <td>No.of Days</td>
                         <td> {{ estimate.num_of_days }}</td>
                     </tr>
-
+                    <tr> 
+                        <td>No.of People</td>
+                        <td> {{ estimate.num_of_people }}</td>
+                    </tr>
                     <tr> 
                         <td>Hours worked per day</td>
                         <td> {{ estimate.hours_worked_per_day }}</td>
                     </tr>
-
+                    <tr>
+                        <td style="font-size:123%"><b>Total labor cost</b></td>
+                        <td><b>{{ estimate.hours_worked_per_day*estimate.num_of_days*estimate.num_of_people }} $</b></td>
+                        @set('Total_labor_cost',estimate.hours_worked_per_day*estimate.num_of_days*estimate.num_of_people)
+                    </tr>
                     <tr> 
                         <td>No.of Hotel Rooms</td>
                         <td> {{ estimate.num_of_hotel_rooms }}</td>
@@ -51,10 +58,19 @@
                         <td>Hotel Cost</td>
                         <td> ${{ estimate.hotel_dollars_per_night }} / 1 night</td>
                     </tr>
-
+                    <tr>
+                        <td style="font-size:123%;"><b>Total Hotel cost</b></td>
+                        <td><b>{{  estimate.num_of_hotel_rooms*estimate.hotel_dollars_per_night*estimate.num_of_hotel_nights }} $</b></td>
+                        @set('Total_Hotel_cost',estimate.num_of_hotel_rooms*estimate.hotel_dollars_per_night*estimate.num_of_hotel_nights)
+                    </tr>
                     <tr> 
                         <td>Food Cost</td>
-                        <td> ${{ estimate.food_dollars_per_day }} / 1 night</td>
+                        <td> ${{ estimate.food_dollars_per_day }} / 1 Day</td>
+                    </tr>
+                    <tr> 
+                        <td style="font-size:123%;"><b>Total Food Cost</b></td>
+                        <td> <b>{{ estimate.food_dollars_per_day*estimate.num_of_days*estimate.num_of_people }} $</b></td>
+                        @set('Total_Food_cost',estimate.food_dollars_per_day*estimate.num_of_days*estimate.num_of_people)
                     </tr>
 
                     <tr> 
@@ -77,6 +93,15 @@
                         <td> {{ estimate.multiplier }}</td>
                     </tr>
                 </tbody>
+                <tr>
+                    <td style="font-size:123%;"><b>Total Vehicle cost</b></td>
+                    <td><b>{{   estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles }}$</b></td>
+                    
+                @set('Total_Vehicle_cost', estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles )
+                
+                {{--  <td>totalcost = {{Total_Vehicle_cost + Total_Food_cost +Total_Hotel_cost+Total_labor_cost}}</td>  --}}
+                @set('fullCost',Total_Vehicle_cost + Total_Food_cost +Total_Hotel_cost+Total_labor_cost)
+                </tr>
             </table>
 
             <a href="{{ '/add-material/' + estimate.id }}" class="btn btn-info float-right"><i class="fa fa-plus" style="font-size: 16px; padding-top: 4px;"></i> Add New</a>
@@ -88,15 +113,18 @@
                         <th>Product</th>
                         <th>Unit Cost</th>
                         <th>Coverage Area</th>
-                        
+                        @set('Total_material_cost',1)
                             @each(material in materials)
                         <tr> 
                             <td> {{ material.product }}</td>
                             <td> ${{ material.unit_cost }}</td>
                             <td> {{ material.coverage_area }}</td>
+                            @set('Total_material_cost', (Total_material_cost*1) + material.unit_cost*(estimate.num_of_sqft/material.coverage_area)) 
                         </tr>
-                        
+                    
                         @endeach
+                        <td style="font-size:123%"><b>Total material cost</b></td>
+                        <td><b>{{ Total_material_cost }} $</b></td>
                     </tbody>
                 </table>
                 
@@ -114,12 +142,18 @@
                     <tbody>
                         <th>Cost Type</th>
                         <th>Price </th>
+                        @set('Total_mis_cost',0)
                         @each(miscCost in miscCosts)
                         <tr> 
                             <td> {{ miscCost.desc }}</td>
                             <td> ${{ miscCost.dollars }}</td>
+                           
+                            @set('Total_mis_cost', (Total_mis_cost*1) + miscCost.dollars)     
+                                            
                         </tr>
                         @endeach
+                        <td style="font-size:123%"><b>Total mislaneous cost</b></td>
+                        <td><b>{{ Total_mis_cost }} $</b></td>
                     </tbody>
                 </table>
                 
@@ -128,5 +162,11 @@
                     No miscellaneous costs added to this estimate!
                 </div>
             @endif
+            <table class="table table-bordered">
+            <tbody>
+            <td style="font-size:123%"><b>Total cost</b></td>
+                    <td><b>{{ (fullCost+Total_mis_cost*1.0) + (Total_material_cost) }} $</b></td>
+            </tbody>
+            </table>
     </div>
 @endsection 
