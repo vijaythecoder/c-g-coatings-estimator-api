@@ -20,24 +20,32 @@ class ExceptionHandler extends BaseExceptionHandler {
    *
    * @return {void}
    */
-  async handle (error, { request, response,session }) {
+  async handle (error, { request, response, session }) {
+    // console.log(error.name)
     if (error.name === 'ValidationException') {
       session.withErrors(error.messages).flashAll()
       await session.commit()
-      response.redirect('back')
-      return
+      return response.redirect('back')
     }
     if (error.name === 'InvalidSessionException'){
-      session.flash({ notification:' You need to login first to Register(exception handler)' })   
-      console.log('Invalid session exception handled')
-
-      session.flashAll()
-      response.redirect('/')
+      session.flash({ notification:' You need to login first' })   
+      await session.commit()
+      return response.redirect('/login')
     }
 
-    // response.status(error.status).send(error.message)
-    
-   
+    if (error.name === 'PasswordMisMatchException'){
+      session.flash({ notification:'Your password is invalid' }) 
+      await session.commit()
+      return response.redirect('/login')
+    }
+
+    if (error.name === 'UserNotFoundException'){
+      session.flash({ notification:'Your email is not found' }) 
+      await session.commit()
+      return response.redirect('/login')
+    }
+
+    response.status(error.status).send(error.message)
   }
 
   /**

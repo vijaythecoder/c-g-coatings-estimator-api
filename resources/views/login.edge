@@ -2,13 +2,14 @@
 @section('content')
    {{--  <h1> {{ title }} </h1>  --}}
   
+   @if(flashMessage('notification'))
+       <div class="notification is-danger">
+           {{ flashMessage('notification') }}
+       </div>
+   @endif
+
    <form method="POST" action="/login">
     {{ csrfField() }}
-    @if(old('notification'))
-    <div class="notification is-success">
-        {{ old('notification') }}
-    </div>
-    @endif
     <div class="field">
       <label class="label" for="exampleInputEmail1">Email address</label>
       <div class="control">

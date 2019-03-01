@@ -20,6 +20,13 @@ class UserController {
         console.log("Inside userController Store")
     }
 
+    async showLogin({ view, response, auth }) {
+      if(auth.user && auth.user.id) {
+        return response.redirect('/estimates')
+      }
+      return view.render('login')
+    }
+
     async login ({ request, auth, response, session }) {
         await auth.logout()
         const { email, password } = request.all()

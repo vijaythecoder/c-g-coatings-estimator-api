@@ -119,7 +119,7 @@
                             <td> {{ material.product }}</td>
                             <td> ${{ material.unit_cost }}</td>
                             <td> {{ material.coverage_area }}</td>
-                            @set('Total_material_cost', (Total_material_cost*1) + material.unit_cost*(estimate.num_of_sqft/material.coverage_area)) 
+                            @set('Total_material_cost', (Total_material_cost*1) + material.unit_cost*material.coverage_area) 
                         </tr>
                     
                         @endeach

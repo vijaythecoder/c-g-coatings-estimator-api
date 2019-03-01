@@ -41,7 +41,7 @@
                         padding-top: 5px;"></i> Edit</a>
                 </td>
                 <td class="text-center">
-                    <form action="{{ 'estimates/' + estimate.id + '?_method=DELETE' }}" method="POST">
+                    <form action="{{ '/estimates/' + estimate.id + '?_method=DELETE' }}" method="POST" onClick="confirm('Are you sure to delete? ')">
                         {{ csrfField() }}
                         <button class="button is-danger" type="submit"><i class="fa fa-trash" style="font-size: 16px;
                             padding-right: 5px;"></i> Delete</button>
@@ -53,7 +53,7 @@
       </table>
       <nav aria-label="Page navigation example">
         <ul class="pagination" style="justify-content:center;">
-            @each(number in range(estimates.pages.lastPage - 1))
+            @each(number in range(estimates.pages.lastPage))
                 <li class="page-item"><a class="page-link" href="{{ '/estimates?page=' + (number + 1) }}">{{ number + 1 }}</a></li>
             @endeach
         </ul>
