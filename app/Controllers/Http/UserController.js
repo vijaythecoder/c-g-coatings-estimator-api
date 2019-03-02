@@ -21,9 +21,12 @@ class UserController {
     }
 
     async showLogin({ view, response, auth }) {
+      
       if(auth.user && auth.user.id) {
+      
         return response.redirect('/estimates')
       }
+      
       return view.render('login')
     }
 
