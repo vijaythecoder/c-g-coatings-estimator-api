@@ -66,11 +66,8 @@ class EstimateController {
 
     // Add logic here for saving the estimate
     const estimate = new Estimate()
-    
     estimate.job_name = request.input('job_name')
-    
     estimate.location = request.input('location')
-    
     estimate.num_of_sqft = request.input('num_of_sqft')
     estimate.num_of_days = request.input('num_of_days')
     estimate.hours_worked_per_day = request.input('hours_worked_per_day')
@@ -83,12 +80,10 @@ class EstimateController {
     estimate.dollars_per_mile = request.input('dollars_per_mile')
     estimate.multiplier = request.input('multiplier')
     await estimate.save();
-
     const material = new Material()
     material.product = request.input('product')
     material.unit_cost = request.input('unit_cost')
     material.coverage_area = request.input('coverage_area')
-    
     await estimate.materials().saveMany([material])
       
       session.flash({ notification: 'Estimate added!' })
@@ -128,8 +123,7 @@ class EstimateController {
     
      const estimate = await Estimate.find(params.id)
      const materials = await estimate.materials().fetch()
-    
-     const miscCosts = await estimate.miscellaneous().fetch()
+    const miscCosts = await estimate.miscellaneous().fetch()
      return view.render('estimates.edit', { estimate: estimate.toJSON(),materials: materials.toJSON(), miscCosts: miscCosts.toJSON()})
   }
 
@@ -138,9 +132,7 @@ class EstimateController {
     
    
     const estimate = await Estimate.find(params.id)
-    
     estimate.job_name = ''
-    
     return view.render('estimates.duplicate', { estimate: estimate.toJSON()})
   
 
