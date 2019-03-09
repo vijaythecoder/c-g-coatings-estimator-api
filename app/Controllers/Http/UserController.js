@@ -20,23 +20,17 @@ class UserController {
         console.log("Inside userController Store")
     }
 
-    async showLogin({ view, response, auth }) {
-      
-      if(auth.user && auth.user.id) {
-      
+    async showLogin({ view, response, auth }) {     
+      if(auth.user && auth.user.id) {     
         return response.redirect('/estimates')
-      }
-      
+      }     
       return view.render('login')
     }
 
     async login ({ request, auth, response, session }) {
         await auth.logout()
         const { email, password } = request.all()
-        console.log('Inside login ')
-        console.log(email, password)
         await auth.attempt(email, password)   
-        console.log('Inside login 2 ')
         session.flash({ notification: 'Successfully logged in' })        
         return response.redirect('/estimates')
     }
@@ -58,22 +52,17 @@ class UserController {
         user.password = request.only(['password']).password ;
 
         await user.save();
-        // session.flash({ notification: 'Successfully Registered' }) 
         session.flash({ notification: 'New user '+ (request.only(['email']).email)+' Registered' })     
-        console.log("New user "+ (request.only(['email']).email)+" Registered")
-        console.log("Inside userController Register");
         response.redirect('/')
     }
-    // async isLoggedIn({request,response,auth}){
-    //     if(auth.)
-    // }
-      
+      // Logout functionality
       async logout({ auth, response }) {
           await auth.logout()
           return response.redirect('/login')
       }
+
+      // Check user session is logged IN
       async checkLoggedIn({auth,response}){
-          console.log('Inside checkLoggedIn')
         try {
             await auth.check()
           } catch (error) {
@@ -82,8 +71,8 @@ class UserController {
           }
       }
 
+      // Get the credentials and 
       async getUser({auth,response}){try {
-        console.log('Inside getuser')
         return await auth.getUser()
       } catch (error) {
         session.flash({ notification:' Credentials missing ' })

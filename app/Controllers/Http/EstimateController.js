@@ -249,7 +249,7 @@ class EstimateController {
       return response.redirect('back')
     }
 
-    // Add logic here for saving the material
+    // saving the material
     const material = new Material()
     material.product = request.input('product')
    material.unit_cost = request.input('unit_cost')
