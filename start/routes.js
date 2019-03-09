@@ -19,6 +19,7 @@ const Route = use('Route')
 Route.get('/', 'UserController.showLogin')
 Route.get('/login', 'UserController.showLogin')
 
+//Routes for estimates and materials
 
 Route.resource('/estimates', 'EstimateController').middleware(['auth'])
 // Route.resource('/estimates', 'EstimateController').middleware('auth')
@@ -32,20 +33,15 @@ Route.post('login', 'UserController.login')
 
 Route.resource('/users','UserController')
 
+//conact form routes
 Route.get('/contact', 'EstimateController.contact')
 Route.post('/send-mail', 'EstimateController.sendMail')
-
 Route.resource('/UserController', 'UserController')
 
-// Route.resource('/estimates', 'EstimateController')
+// 
 Route.get('/posts', async () => {
     return await Database.table('samples').select('*')
   })
-
-  //for authentication
-  // Route
-  // .get('users/:id', 'UserController.show')
-  // .middleware('auth')
 
   // Route.post('/login', 'UserController.login')
   Route.get('/login','UserController.show')
