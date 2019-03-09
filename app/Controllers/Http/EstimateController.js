@@ -107,11 +107,8 @@ class EstimateController {
   async show ({params, view }) {
     
     const estimate = await Estimate.find(params.id)
-    
     const materials = await estimate.materials().fetch()
-    
     const miscCosts = await estimate.miscellaneous().fetch()
-    
     return view.render('estimates.show', { estimate: estimate.toJSON(), materials: materials.toJSON(), miscCosts: miscCosts.toJSON() })
 }
 
