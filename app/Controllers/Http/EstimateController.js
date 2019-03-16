@@ -160,9 +160,13 @@ class EstimateController {
     const estimate = await Estimate.find(params.id)
     
    estimate.job_name = request.input('job_name')
+   
    estimate.location = request.input('location')
+   
    estimate.num_of_sqft = request.input('num_of_sqft')
+   
    estimate.num_of_days = request.input('num_of_days')
+   
    estimate.hours_worked_per_day = request.input('hours_worked_per_day')
    estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
@@ -214,11 +218,11 @@ class EstimateController {
    */
   async destroy ({ params, request, response, session }) {
     const estimate = await Estimate.find(params.id)
-    await estimate.materials().delete()
-    await estimate.miscellaneous().delete()
-    await estimate.delete()
-    session.flash({ notification: 'Estimate and Material Deleted!' })
-    return response.redirect('/estimates')  
+     await estimate.materials().delete()
+     await estimate.miscellaneous().delete()
+     await estimate.delete()
+     session.flash({ notification: 'Estimate and Material Deleted!' })
+     return response.redirect('/estimates')  
   }
 
   /* Show form to add a new material
@@ -236,16 +240,17 @@ class EstimateController {
     if (validation.fails()) {
       session
         .withErrors(validation.messages())
-        session.flash({ notification: 'Fix the validation errors!' })
+         
+         session.flash({ notification: 'Fix the validation errors!' })
       return response.redirect('back')
     }
 
     // saving the material
     const material = new Material()
     material.product = request.input('product')
-   material.unit_cost = request.input('unit_cost')
-   material.coverage_area = request.input('coverage_area')
-   material.estimate_id = request.input('id')
+    material.unit_cost = request.input('unit_cost')
+    material.coverage_area = request.input('coverage_area')
+    material.estimate_id = request.input('id')
 
    await material.save();
     session.flash({ notification: 'Material added!' })
