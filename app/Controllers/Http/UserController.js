@@ -60,8 +60,9 @@ class UserController {
         try {
             await auth.check()
           } catch (error) {
-            session.flash({ notification:' Credentials missing ' })
-            response.send(error.message)
+             session.flash({ notification:' Credentials missing ' })
+             
+             response.send(error.message)
           }
       }
 
@@ -69,6 +70,7 @@ class UserController {
       async getUser({auth,response}){try {
         return await auth.getUser()
       } catch (error) {
+       
         session.flash({ notification:' Credentials missing ' })
         response.send('Credentials missing')
       }}
