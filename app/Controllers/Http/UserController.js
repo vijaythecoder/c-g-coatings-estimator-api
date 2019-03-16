@@ -1,18 +1,18 @@
 'use strict'
 
 class UserController {
-    // async store ({ request, response }) {
-    //     const User = use('App/Models/User')
+    async store ({ request, response }) {
+        const User = use('App/Models/User')
 
-    //     // creating first user
-    //     const user = new User()
-    //     user.username = "sID"
-    //     user.email = 's531508@gmail.com'
-    //     user.password = 'asd'
-    //     await user.save()
-    //     console.log("Inside userController Store")
+        // creating first user
+        const user = new User()
+        user.username = "sID"
+        user.email = 's531508@gmail.com'
+        user.password = 'asd'
+        await user.save()
+        console.log("Inside userController Store")
 
-    // }
+    }
 
     async showLogin({ view, response, auth }) {     
       if(auth.user && auth.user.id) {     
