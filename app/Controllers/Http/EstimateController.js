@@ -27,7 +27,7 @@ class EstimateController {
   }
 
   async home({ response }) {
-    return response.redirect('/estimates')
+ return response.redirect('/estimates')
   }
 
   /**
@@ -73,7 +73,10 @@ class EstimateController {
     estimate.hours_worked_per_day = request.input('hours_worked_per_day')
     estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
     estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
+
+
     estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
+   
     estimate.food_dollars_per_day = request.input('food_dollars_per_day')
     estimate.num_of_vehicles = request.input('num_of_vehicles')
     estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
@@ -158,15 +161,10 @@ class EstimateController {
     }
     
     const estimate = await Estimate.find(params.id)
-    
-   estimate.job_name = request.input('job_name')
-   
+    estimate.job_name = request.input('job_name')
    estimate.location = request.input('location')
-   
    estimate.num_of_sqft = request.input('num_of_sqft')
-   
    estimate.num_of_days = request.input('num_of_days')
-   
    estimate.hours_worked_per_day = request.input('hours_worked_per_day')
    estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
