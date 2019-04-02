@@ -124,22 +124,17 @@ class EstimateController {
     
      console.log('edit');
     
-     const estimate = await Estimate.find(params.id)
-     const materials = await estimate.materials().fetch()
+    const estimate = await Estimate.find(params.id)
+    const materials = await estimate.materials().fetch()
     const miscCosts = await estimate.miscellaneous().fetch()
      return view.render('estimates.edit', { estimate: estimate.toJSON(),materials: materials.toJSON(), miscCosts: miscCosts.toJSON()})
   }
 
   async duplicate ({ params, view }) {
     //Duplicate page of the estimates.
-    
-   
     const estimate = await Estimate.find(params.id)
     estimate.job_name = ''
     return view.render('estimates.duplicate', { estimate: estimate.toJSON()})
-  
-
-
  }
   /**
    * Update estimate details.
