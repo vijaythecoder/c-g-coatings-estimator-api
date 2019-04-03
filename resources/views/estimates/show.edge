@@ -1,6 +1,7 @@
 @layout('master')
 
 @section('content')
+<script src="./operations.js"></script>
     <div class="box">
             <div class="float-right">
                 <a href="{{ route('/estimates') }}">All Estimates</a> | 
@@ -113,13 +114,13 @@
                         <th>Product</th>
                         <th>Unit Cost</th>
                         <th>Coverage Area</th>
-                        @set('Total_material_cost',1)
+                        @set('Total_material_cost',0)
                             @each(material in materials)
                         <tr> 
                             <td> {{ material.product }}</td>
                             <td> ${{ material.unit_cost }}</td>
                             <td> {{ material.coverage_area }}</td>
-                            @set('Total_material_cost', (Total_material_cost*1) + material.unit_cost*material.coverage_area) 
+                            @set('Total_material_cost', (+Total_material_cost) + material.unit_cost*material.coverage_area) 
                         </tr>
                     
                         @endeach
@@ -148,7 +149,7 @@
                             <td> {{ miscCost.desc }}</td>
                             <td> ${{ miscCost.dollars }}</td>
                            
-                            @set('Total_mis_cost', (Total_mis_cost*1) + miscCost.dollars)     
+                            @set('Total_mis_cost', (+Total_mis_cost) + miscCost.dollars)     
                                             
                         </tr>
                         @endeach
