@@ -41,6 +41,7 @@ class EstimateController {
    */
   async create ({ request, response, view }) {
     // create estimate 
+   
     return view.render('estimates.create', { estimate: [] })
   }
 
@@ -81,6 +82,8 @@ class EstimateController {
    
     estimate.food_dollars_per_day = request.input('food_dollars_per_day')
     estimate.num_of_vehicles = request.input('num_of_vehicles')
+    
+    
     estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
     estimate.dollars_per_mile = request.input('dollars_per_mile')
     estimate.multiplier = request.input('multiplier')
@@ -88,6 +91,7 @@ class EstimateController {
     const material = new Material()
     material.product = request.input('product')
     material.unit_cost = request.input('unit_cost')
+    
     material.coverage_area = request.input('coverage_area')
     await estimate.materials().saveMany([material])
       
