@@ -8,24 +8,24 @@ test('make sure add operation gives 4', async ({ assert }) => {
 })
 
 let data = {
-  name: 'aakcja',
-  acasd: 'avsd'
+  job_name: 'newChange',
+ num_of_days: 12
 } 
 
 test('Testing if job is created and generating numeric ID', async ({ assert }) => {
-  let estimate = Estimate.create(data)
-  console.log(estimate.id)
-  // assert.isNumber(estimate.id)
+  const estimated = new Estimate()
+  estimated.job_name =  'newjjChange',
+  estimated.num_of_days =  12
+  await estimated.save();
+  console.log(estimated.id)
+  assert.isNumber(estimated.id)
 })
 
 
 test('Testing if estimate can be edited', async ({ assert }) => {
   const estimate = await Estimate.find(34)
-  console.log(estimate.toJSON().job_name)
   estimate.job_name = 'sairam';
+  await estimate.save();
   const nameAltered = await Estimate.find(34)
-  console.log(estimate.toJSON().job_name);
-  console.log(nameAltered.toJSON().job_name);
   assert.equal(nameAltered.toJSON().job_name,'sairam');
-  // assert.isNumber(estimate.id)
 })

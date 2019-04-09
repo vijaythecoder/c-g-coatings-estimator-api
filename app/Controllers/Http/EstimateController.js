@@ -73,12 +73,10 @@ class EstimateController {
     estimate.num_of_days = request.input('num_of_days')
    estimate.hours_worked_per_day = request.input('hours_worked_per_day')
     estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
-    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')  estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
-   
+    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')  
+    estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night') 
     estimate.food_dollars_per_day = request.input('food_dollars_per_day')
     estimate.num_of_vehicles = request.input('num_of_vehicles')
-    
-    
     estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
     estimate.dollars_per_mile = request.input('dollars_per_mile')
     estimate.multiplier = request.input('multiplier')
