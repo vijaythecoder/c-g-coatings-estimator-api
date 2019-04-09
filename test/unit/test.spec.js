@@ -16,7 +16,16 @@ test('Testing if job is created and generating numeric ID', async ({ assert }) =
   let estimate = Estimate.create(data)
   console.log(estimate.id)
   // assert.isNumber(estimate.id)
-
 })
 
-// estimate.name = 'vijay'
+
+test('Testing if estimate can be edited', async ({ assert }) => {
+  const estimate = await Estimate.find(34)
+  console.log(estimate.toJSON().job_name)
+  estimate.job_name = 'sairam';
+  const nameAltered = await Estimate.find(34)
+  console.log(estimate.toJSON().job_name);
+  console.log(nameAltered.toJSON().job_name);
+  assert.equal(nameAltered.toJSON().job_name,'sairam');
+  // assert.isNumber(estimate.id)
+})
