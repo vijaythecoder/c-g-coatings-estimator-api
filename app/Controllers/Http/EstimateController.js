@@ -41,6 +41,7 @@ class EstimateController {
    */
   async create ({ request, response, view }) {
     // create estimate 
+   
     return view.render('estimates.create', { estimate: [] })
   }
 
@@ -70,15 +71,14 @@ class EstimateController {
     estimate.location = request.input('location')
     estimate.num_of_sqft = request.input('num_of_sqft')
     estimate.num_of_days = request.input('num_of_days')
-    estimate.hours_worked_per_day = request.input('hours_worked_per_day')
+   estimate.hours_worked_per_day = request.input('hours_worked_per_day')
     estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
-    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
-
-
-    estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
+    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')  estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
    
     estimate.food_dollars_per_day = request.input('food_dollars_per_day')
     estimate.num_of_vehicles = request.input('num_of_vehicles')
+    
+    
     estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
     estimate.dollars_per_mile = request.input('dollars_per_mile')
     estimate.multiplier = request.input('multiplier')
@@ -86,6 +86,7 @@ class EstimateController {
     const material = new Material()
     material.product = request.input('product')
     material.unit_cost = request.input('unit_cost')
+    
     material.coverage_area = request.input('coverage_area')
     await estimate.materials().saveMany([material])
       
@@ -275,7 +276,7 @@ class EstimateController {
    misc.dollars = request.input('dollars')
    misc.estimate_id = request.input('id')
 
-   await misc.save();
+    await misc.save();
     session.flash({ notification: 'Miscellaneous cost added!' })
     return response.redirect('/estimates/' + request.input('id'))
   }
