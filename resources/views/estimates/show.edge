@@ -113,7 +113,7 @@
                         <th>Product</th>
                         <th>Unit Cost</th>
                         <th>Coverage Area</th>
-                        @set('Total_material_cost',1)
+                        @set('Total_material_cost', 0)
                             @each(material in materials)
                         <tr> 
                             <td> {{ material.product }}</td>
@@ -123,8 +123,10 @@
                         </tr>
                     
                         @endeach
-                        <td style="font-size:123%"><b>Total material cost</b></td>
-                        <td><b>{{ Total_material_cost }} $</b></td>
+                        <tr>
+                            <td colspan="2" style="font-size:123%"><b>Total material cost</b></td>
+                            <td><b>{{ Total_material_cost }} $</b></td>
+                        </tr>
                     </tbody>
                 </table>
                 
