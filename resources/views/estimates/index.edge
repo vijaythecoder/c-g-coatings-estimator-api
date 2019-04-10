@@ -41,7 +41,7 @@
                         padding-top: 5px;"></i> Edit</a>
                 </td>
                 <td class="text-center">
-                    <form action="{{ '/estimates/' + estimate.id + '?_method=DELETE' }}" method="POST" onClick="confirm('Are you sure to delete? ')">
+                    <form action="{{ '/estimates/' + estimate.id + '?_method=DELETE' }}" method="POST" onClick="return confirm('Are you sure to delete? ')">
                         {{ csrfField() }}
                         <button class="button is-danger" type="submit"><i class="fa fa-trash" style="font-size: 16px;
                             padding-right: 5px;"></i> Delete</button>

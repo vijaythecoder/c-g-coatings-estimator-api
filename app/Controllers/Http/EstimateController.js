@@ -22,7 +22,7 @@ class EstimateController {
    * @param {View} ctx.view
    */
   async index ({ auth, request, response, view }) {
-    const estimates = await Estimate.query().paginate(request.input('page'), 20)
+    const estimates = await Estimate.query().orderBy('id', 'desc').paginate(request.input('page'), 20)
     return view.render('estimates.index', { estimates: estimates })
   }
 
