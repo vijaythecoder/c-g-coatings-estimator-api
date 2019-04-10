@@ -51,12 +51,18 @@
             @endeach
         </tbody>
       </table>
-      <nav aria-label="Page navigation example">
-        <ul class="pagination" style="justify-content:center;">
+      <nav aria-label="Page navigation example" >
+
+        <ul class="pagination" style="justify-content:center;" >
+            <a style="justify-content:left;" class="page-item"><a  class="page-link " href="{{ '/estimates?page=' +( +( (estimates.pages.page-item == 1)?1:estimates.pages.page-item) - 1)  }}"><< Previous</a></a>              
+            <ul class="pagination" style="justify-content:center;" >
             @each(number in range(estimates.pages.lastPage))
-                <li class="page-item"><a class="page-link" href="{{ '/estimates?page=' + (number + 1) }}">{{ number + 1 }}</a></li>
+                <li  class="page-item"><a class="page-link" href="{{ '/estimates?page=' + (number + 1) }}">{{ number + 1 }}</a></li>
             @endeach
+            </ul>
+            <a style="justify-content:right;" class="page-item"><a  class="page-link " href="{{ '/estimates?page=' + ( +( (estimates.pages.page-item == estimates.pages.lastPage)?estimates.pages.lastPage:estimates.pages.page-item) + 1) }}">Next>></a></a>
         </ul>
+
       </nav>
      
       @else

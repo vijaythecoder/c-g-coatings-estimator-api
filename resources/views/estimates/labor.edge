@@ -10,6 +10,7 @@
     <label for="'num_of_sqft">'Num of Sqft</label>
     <input type="number" class="form-control" id="'num_of_sqft" name="num_of_sqft" value="{{ estimate.num_of_sqft ? estimate.num_of_sqft : '' }}">
 </div>
+<h1 class="title">Labor Cost</h1>
 <div class="form-group">
     <label for="num_of_days">No.of Days</label>
     <input type="number" class="form-control" id="num_of_days" name="num_of_days" value="{{ estimate.num_of_days ? estimate.num_of_days : '' }}" required>
@@ -18,6 +19,7 @@
     <label for="hours_worked_per_day">Hours worked per day</label>
     <input type="string" class="form-control" id="hours_worked_per_day" name="hours_worked_per_day" value="{{ estimate.hours_worked_per_day ? estimate.hours_worked_per_day : '' }}">
 </div>
+<h1 class="title">Hotel Cost</h1>
 <div class="form-group">
     <label for="num_of_hotel_rooms">No.of Hotel Rooms</label>
     <input type="number" class="form-control" id="num_of_hotel_rooms" name="num_of_hotel_rooms" value="{{ estimate.num_of_hotel_rooms ? estimate.num_of_hotel_rooms : '' }}">
@@ -30,10 +32,12 @@
     <label for="hotel_dollars_per_night">Hotel Dollars per Night</label>
     <input type="number" class="form-control" id="hotel_dollars_per_night" name="hotel_dollars_per_night" value="{{ estimate.hotel_dollars_per_night ? estimate.hotel_dollars_per_night : '' }}">
 </div>
+<h1 class="title">Food Cost</h1>
 <div class="form-group">
     <label for="food_dollars_per_day">Food Dollars per day </label>
     <input type="number" class="form-control" id="food_dollars_per_day" name="food_dollars_per_day" value="{{ estimate.food_dollars_per_day ? estimate.food_dollars_per_day : '' }}">
 </div>
+<h1 class="title">Vehicle Cost</h1>
 <div class="form-group">
     <label for="num_of_vehicles">No.of Vehicles</label>
     <input type="number" class="form-control" id="num_of_vehicles" name="num_of_vehicles" value="{{ estimate.num_of_vehicles ? estimate.num_of_vehicles : '' }}">

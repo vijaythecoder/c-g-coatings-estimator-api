@@ -1,6 +1,7 @@
 @layout('master')
 
 @section('content')
+<script src="./operations.js"></script>
     <div class="box">
             <div class="float-right">
                 <a href="{{ route('/estimates') }}">All Estimates</a> | 
@@ -105,7 +106,7 @@
             </table>
 
             <a href="{{ '/add-material/' + estimate.id }}" class="btn btn-info float-right"><i class="fa fa-plus" style="font-size: 16px; padding-top: 4px;"></i> Add New</a>
-            <h1 class="title">Materials</h1>
+            <h2 class="title" style="font-size:153%;">Materials</h2>
             @if(materials.length)
                 
                 <table class="table table-bordered">
@@ -119,7 +120,7 @@
                             <td> {{ material.product }}</td>
                             <td> ${{ material.unit_cost }}</td>
                             <td> {{ material.coverage_area }}</td>
-                            @set('Total_material_cost', (Total_material_cost*1) + material.unit_cost*material.coverage_area) 
+                            @set('Total_material_cost', (+Total_material_cost) + material.unit_cost*material.coverage_area) 
                         </tr>
                     
                         @endeach
@@ -137,7 +138,7 @@
             @endif
             
             <a href="{{ '/add-misc/' + estimate.id }}" class="btn btn-info float-right"><i class="fa fa-plus" style="font-size: 16px; padding-top: 4px;"></i> Add New</a>
-            <h1 class="title">Miscellaneous Costs</h1>
+            <h1 class="title" style="font-size:153%;">Miscellaneous Costs</h1>
             @if(miscCosts.length)
                 
                 <table class="table table-bordered">
@@ -150,7 +151,7 @@
                             <td> {{ miscCost.desc }}</td>
                             <td> ${{ miscCost.dollars }}</td>
                            
-                            @set('Total_mis_cost', (Total_mis_cost*1) + miscCost.dollars)     
+                            @set('Total_mis_cost', (+Total_mis_cost) + miscCost.dollars)     
                                             
                         </tr>
                         @endeach

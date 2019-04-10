@@ -27,7 +27,7 @@ class EstimateController {
   }
 
   async home({ response }) {
-    return response.redirect('/estimates')
+ return response.redirect('/estimates')
   }
 
   /**
@@ -41,6 +41,7 @@ class EstimateController {
    */
   async create ({ request, response, view }) {
     // create estimate 
+   
     return view.render('estimates.create', { estimate: [] })
   }
 
@@ -70,10 +71,10 @@ class EstimateController {
     estimate.location = request.input('location')
     estimate.num_of_sqft = request.input('num_of_sqft')
     estimate.num_of_days = request.input('num_of_days')
-    estimate.hours_worked_per_day = request.input('hours_worked_per_day')
+   estimate.hours_worked_per_day = request.input('hours_worked_per_day')
     estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
-    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
-    estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
+    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')  
+    estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night') 
     estimate.food_dollars_per_day = request.input('food_dollars_per_day')
     estimate.num_of_vehicles = request.input('num_of_vehicles')
     estimate.num_of_miles_pervehicle = request.input('num_of_miles_pervehicle')
@@ -83,6 +84,7 @@ class EstimateController {
     const material = new Material()
     material.product = request.input('product')
     material.unit_cost = request.input('unit_cost')
+    
     material.coverage_area = request.input('coverage_area')
     await estimate.materials().saveMany([material])
       
@@ -121,22 +123,17 @@ class EstimateController {
     
      console.log('edit');
     
-     const estimate = await Estimate.find(params.id)
-     const materials = await estimate.materials().fetch()
+    const estimate = await Estimate.find(params.id)
+    const materials = await estimate.materials().fetch()
     const miscCosts = await estimate.miscellaneous().fetch()
      return view.render('estimates.edit', { estimate: estimate.toJSON(),materials: materials.toJSON(), miscCosts: miscCosts.toJSON()})
   }
 
   async duplicate ({ params, view }) {
     //Duplicate page of the estimates.
-    
-   
     const estimate = await Estimate.find(params.id)
     estimate.job_name = ''
     return view.render('estimates.duplicate', { estimate: estimate.toJSON()})
-  
-
-
  }
   /**
    * Update estimate details.
@@ -158,15 +155,10 @@ class EstimateController {
     }
     
     const estimate = await Estimate.find(params.id)
-    
-   estimate.job_name = request.input('job_name')
-   
+    estimate.job_name = request.input('job_name')
    estimate.location = request.input('location')
-   
    estimate.num_of_sqft = request.input('num_of_sqft')
-   
    estimate.num_of_days = request.input('num_of_days')
-   
    estimate.hours_worked_per_day = request.input('hours_worked_per_day')
    estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
@@ -282,7 +274,7 @@ class EstimateController {
    misc.dollars = request.input('dollars')
    misc.estimate_id = request.input('id')
 
-   await misc.save();
+    await misc.save();
     session.flash({ notification: 'Miscellaneous cost added!' })
     return response.redirect('/estimates/' + request.input('id'))
   }

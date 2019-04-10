@@ -60,7 +60,6 @@ class UserController {
         user.username = request.only(['username']).username;
         user.email = request.only(['email']).email;
         user.password = request.only(['password']).password ;
-
         await user.save();
         session.flash({ notification: 'New user '+ (request.only(['email']).email)+' Registered' })     
         response.redirect('/')
@@ -77,7 +76,6 @@ class UserController {
             await auth.check()
           } catch (error) {
              session.flash({ notification:' Credentials missing ' })
-             
              response.send(error.message)
           }
       }
