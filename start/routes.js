@@ -18,6 +18,8 @@ const Route = use('Route')
 
 Route.get('/', 'UserController.showLogin')
 Route.get('/login', 'UserController.showLogin')
+Route.get('/forgot-password', 'UserController.showForgot')
+Route.post('/forgot-password', 'UserController.forgot')
 
 //Routes for estimates and materials
 
