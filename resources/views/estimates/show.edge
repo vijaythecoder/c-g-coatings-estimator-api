@@ -8,7 +8,8 @@
                 <a href="{{ '/estimates/' + estimate.id + '/edit' }}">Edit Estimate</a> | 
                 <a href="{{ '/estimates/' + estimate.id + '/duplicate' }}">Duplicate Estimate</a>
             </div>
-            <h1 class="title">Estimate {{ estimate.id }}</h1>
+            <h1 class="title">{{ estimate.job_name }}</h1>
+            
             <br>
             <table class="table table-bordered">
                 <tbody>
@@ -16,6 +17,10 @@
                     <tr> 
                         <td>Job Name</td>
                         <td> {{ estimate.job_name }}</td>
+                    </tr>
+                    <tr> 
+                        <td>Estimate Id</td>
+                        <td> {{ estimate.id }}</td>
                     </tr>
 
                     <tr> 
@@ -40,10 +45,14 @@
                         <td>Hours worked per day</td>
                         <td> {{ estimate.hours_worked_per_day }}</td>
                     </tr>
+                    <tr> 
+                        <td>Dollars paid per hour</td>
+                        <td> {{ estimate.dollar_per_hour  }}</td>
+                    </tr>
                     <tr>
                         <td style="font-size:123%"><b>Total labor cost</b></td>
-                        <td><b>${{ estimate.hours_worked_per_day*estimate.num_of_days*estimate.num_of_people }}</b></td>
-                        @set('Total_labor_cost',estimate.hours_worked_per_day*estimate.num_of_days*estimate.num_of_people)
+                        <td><b>${{ estimate.hours_worked_per_day*estimate.num_of_days*estimate.num_of_people*estimate.dollar_per_hour  }}</b></td>
+                        @set('Total_labor_cost',estimate.hours_worked_per_day*estimate.num_of_days*estimate.num_of_people*estimate.dollar_per_hour )
                     </tr>
                     <tr> 
                         <td>No.of Hotel Rooms</td>
@@ -187,7 +196,7 @@
             <table class="table table-bordered">
             <tbody>
             <td style="font-size:123%"><b>Total cost</b></td>
-                    <td><b>${{ (fullCost+Total_mis_cost*1.0) + (Total_material_cost) }}</b></td>
+                    <td><b>{{ ((fullCost+Total_mis_cost*1.0) + (Total_material_cost) )*estimate.multiplier}} $</b></td>
             </tbody>
             </table>
     </div>

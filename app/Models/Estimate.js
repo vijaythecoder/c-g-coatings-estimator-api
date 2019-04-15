@@ -12,7 +12,8 @@ static get rules () {
   return {
     job_name: `required|unique:estimates,job_name,id,${this.id}`,
     num_of_people: 'required',
-    num_of_days: 'required'
+    num_of_days: 'required',
+    // dollar_per_hour:'required'
   }
 }
 
@@ -29,7 +30,8 @@ static get messages () {
     'job_name.required': '* Job name is mandatory',
     'job_name.unique': '* Job name already exists! It must be unique',
     'num_of_people.required': '* No. of people is mandatory',
-    'num_of_days.required': '* No. of days is mandatory'
+    'num_of_days.required': '* No. of days is mandatory',
+    // 'dollar_per_hour':'* dollars per hour is mandatory'
   }
 }
 
