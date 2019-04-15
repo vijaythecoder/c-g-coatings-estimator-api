@@ -21,8 +21,12 @@ class EstimateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ auth, request, response, view }) {
-    const estimates = await Estimate.query().paginate(request.input('page'), 20)
+  async index ({ auth, request, response, view, params }) {
+    let search = request.input('search') ? request.input('search') : ''
+    const estimates = await Estimate
+                              .query()
+                              .where('job_name','like', '%'+search+'%')
+                              .orderBy('id', 'desc').paginate(request.input('page'), 20)
     return view.render('estimates.index', { estimates: estimates })
   }
 
@@ -71,7 +75,8 @@ class EstimateController {
     estimate.location = request.input('location')
     estimate.num_of_sqft = request.input('num_of_sqft')
     estimate.num_of_days = request.input('num_of_days')
-   estimate.hours_worked_per_day = request.input('hours_worked_per_day')
+    estimate.hours_worked_per_day = request.input('hours_worked_per_day')
+    estimate.dollar_per_hour = request.input('dollar_per_hour')
     estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
     estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')  
     estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night') 
@@ -81,12 +86,12 @@ class EstimateController {
     estimate.dollars_per_mile = request.input('dollars_per_mile')
     estimate.multiplier = request.input('multiplier')
     await estimate.save();
-    const material = new Material()
-    material.product = request.input('product')
-    material.unit_cost = request.input('unit_cost')
+    // const material = new Material()
+    // material.product = request.input('product')
+    // material.unit_cost = request.input('unit_cost')
     
-    material.coverage_area = request.input('coverage_area')
-    await estimate.materials().saveMany([material])
+    // material.coverage_area = request.input('coverage_area')
+    // await estimate.materials().saveMany([material])
       
       session.flash({ notification: 'Estimate added!' })
       return response.redirect('/estimates')
@@ -160,6 +165,7 @@ class EstimateController {
    estimate.num_of_sqft = request.input('num_of_sqft')
    estimate.num_of_days = request.input('num_of_days')
    estimate.hours_worked_per_day = request.input('hours_worked_per_day')
+   estimate.dollar_per_hour = request.input('dollar_per_hour')
    estimate.num_of_hotel_rooms = request.input('num_of_hotel_rooms')
    estimate.num_of_hotel_nights = request.input('num_of_hotel_nights')
    estimate.hotel_dollars_per_night = request.input('hotel_dollars_per_night')
@@ -215,6 +221,20 @@ class EstimateController {
      await estimate.delete()
      session.flash({ notification: 'Estimate and Material Deleted!' })
      return response.redirect('/estimates')  
+  }
+  
+  async destroyMaterial ({ params, response, session }) {
+    const material = await Material.find(params.id)
+     await material.delete()
+     session.flash({ notification: 'Material Deleted!' })
+     return response.redirect('back')
+  }
+
+  async destroyMisc ({ params, response, session }) {
+    const miscCost = await MiscCost.find(params.id)
+     await miscCost.delete()
+     session.flash({ notification: 'Miscellaneous Cost Deleted!' })
+     return response.redirect('back')
   }
 
   /* Show form to add a new material

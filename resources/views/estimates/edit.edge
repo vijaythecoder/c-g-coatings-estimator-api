@@ -5,16 +5,18 @@
             <div class="float-right">
                 <a href="{{ route('/estimates') }}">
                 All Estimates
-              </a>
+              </a> |
+              <a href="{{ '/add-misc/' + estimate.id }}"> Add Miscellaneous</a> |
+              <a href="{{ '/add-material/' + estimate.id }}"> Add Material</a>
             </div>
         <h1 class="title">Edit Estimate: {{ estimate.id }}</h1>
+
         <form action="/estimates/{{ estimate.id }}?_method=PUT" method="POST">
             {{ csrfField() }}
             @include('estimates.fields')
-            <a style= "margin-left: 2.5em;padding: 0.25em 0.5em 0.5em 0.5em;" href="{{ '/add-material/' + estimate.id }}" class="btn btn-info float-right"><i class="fa fa-plus" style="font-size: 16px; padding-top: 4px;"></i> Add New</a>
-
+            <br><br>
            @if(materials.length)
-           <a href="{{ '/add-material/' + estimate.id }}" class="btn btn-info float-right"><i class="fa fa-plus" style="font-size: 16px; padding-top: 4px;"></i> Add New Material</a>
+           <a href="{{ '/add-material/' + estimate.id }}" class="btn btn-info float-right"><i class="fa fa-plus" style="font-size: 16px; padding-top: 4px;"></i> Add Material</a>
             <h2><b>Associated Materials</b></h2>
             <hr>
             @each(material in materials)
@@ -44,13 +46,8 @@
                   
             @endeach
             @endif
-            <p >   
-            <a style= "margin-left: 2.5em;padding: 0.25em 0.5em 0.5em 0.5em;" href="{{ '/add-misc/' + estimate.id }}" class="btn btn-info float-right"><i class="fa fa-plus" style="font-size: 16px; padding-top: 4px;"></i> Add New</a>
-
         @if(miscCosts.length)
-            <a href="{{ '/add-misc/' + estimate.id }}" class="btn btn-info float-right"><i class="fa fa-plus" style="font-size: 16px; padding-top: 4px;"></i>  Add New Miscellaneous</a> 
-        </p>
-            <h2><b>Associated Miscellaneous costs</b></h2>
+        <a style= "margin-left: 10px; padding: 0.25em 0.5em 0.5em 0.5em;" href="{{ '/add-misc/' + estimate.id }}" class="btn btn-info float-right"><i class="fa fa-plus" style="font-size: 16px; padding-top: 4px;"></i>  Add Miscellaneous</a>             <h2><b>Associated Miscellaneous costs</b></h2>
             
             <hr>
             

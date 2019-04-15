@@ -13,6 +13,7 @@ class EstimatesSchema extends Schema {
       table.integer('num_of_sqft').defaultTo(10)
       table.integer('num_of_days').defaultTo(1)
       table.integer('hours_worked_per_day')
+      table.integer('dollar_per_hour').defaultTo(12)
       table.integer('num_of_hotel_rooms')
       table.integer('num_of_hotel_nights')
       table.integer('hotel_dollars_per_night')

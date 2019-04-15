@@ -54,6 +54,12 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
+            <label for="dollar_per_hour"> Dollars per Hour</label>
+            <input type="number" class="form-control" id="dollar_per_hour" name="dollar_per_hour" value="{{ estimate.dollar_per_hour ? estimate.dollar_per_hour : 0 }}">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
             <label for="num_of_hotel_rooms">No.of Hotel Rooms</label>
             <input type="number" class="form-control" id="num_of_hotel_rooms" name="num_of_hotel_rooms" value="{{ estimate.num_of_hotel_rooms ? estimate.num_of_hotel_rooms : null }}">
         </div>
