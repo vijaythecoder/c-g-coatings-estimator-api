@@ -1,33 +1,40 @@
 @layout('master')
 @section('content')
-   <h1> {{ title }} </h1>
-   <h1 style="font-size:300%; text-align:center"><b> C&G Coatings Estimator</b></h1><br>
-  
-   @if(flashMessage('notification'))
-       <div class="notification is-danger">
-           {{ flashMessage('notification') }}
-       </div>
-   @endif
+<div class="columns is-mobile is-centered">
+    <div class="column is-half">
+      <div class="box">
 
-  
-   <form method="POST" action="/login">
-    {{ csrfField() }}
-    <div class="field">
-      <label class="label" for="exampleInputEmail1">Email address</label>
-      <div class="control">
-        <input name="email" class="input" type="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <h1 style="font-size:150%; text-align:center"><b> C&G Coatings Estimator</b></h1><br>
+        
+          @if(flashMessage('notification'))
+              <div class="notification is-danger">
+                  {{ flashMessage('notification') }}
+              </div>
+          @endif
+      
+        
+          <form method="POST" action="/login">
+          {{ csrfField() }}
+          <div class="field">
+            <label class="label" for="exampleInputEmail1">Email address</label>
+            <div class="control">
+              <input name="email" class="input" type="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="exampleInputPassword1">Password</label>
+            <div class="control">
+              <input name="password" class="input" type="password" id="exampleInputPassword1" placeholder="Password">
+            </div>
+          </div>
+          
+          <div class="control">
+            <button name="login" type="submit" class="button is-primary">Login</button>
+          </div>
+        </form>
+      
       </div>
     </div>
-    <div class="field">
-      <label class="label" for="exampleInputPassword1">Password</label>
-      <div class="control">
-        <input name="password" class="input" type="password" id="exampleInputPassword1" placeholder="Password">
-      </div>
-    </div>
-    
-    <div class="control">
-      <button name="login" type="submit" class="button is-primary">Login</button>
-    </div>
-  </form>
-
+  </div>
+  
  @endsection

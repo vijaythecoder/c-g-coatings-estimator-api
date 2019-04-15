@@ -42,7 +42,7 @@
                     </tr>
                     <tr>
                         <td style="font-size:123%"><b>Total labor cost</b></td>
-                        <td><b>{{ estimate.hours_worked_per_day*estimate.num_of_days*estimate.num_of_people }} $</b></td>
+                        <td><b>${{ estimate.hours_worked_per_day*estimate.num_of_days*estimate.num_of_people }}</b></td>
                         @set('Total_labor_cost',estimate.hours_worked_per_day*estimate.num_of_days*estimate.num_of_people)
                     </tr>
                     <tr> 
@@ -61,7 +61,7 @@
                     </tr>
                     <tr>
                         <td style="font-size:123%;"><b>Total Hotel cost</b></td>
-                        <td><b>{{  estimate.num_of_hotel_rooms*estimate.hotel_dollars_per_night*estimate.num_of_hotel_nights }} $</b></td>
+                        <td><b>${{  estimate.num_of_hotel_rooms*estimate.hotel_dollars_per_night*estimate.num_of_hotel_nights }}</b></td>
                         @set('Total_Hotel_cost',estimate.num_of_hotel_rooms*estimate.hotel_dollars_per_night*estimate.num_of_hotel_nights)
                     </tr>
                     <tr> 
@@ -69,8 +69,12 @@
                         <td> ${{ estimate.food_dollars_per_day }} / 1 Day</td>
                     </tr>
                     <tr> 
+                        <td>No.of People</td>
+                        <td> {{ estimate.num_of_people }}</td>
+                    </tr>
+                    <tr> 
                         <td style="font-size:123%;"><b>Total Food Cost</b></td>
-                        <td> <b>{{ estimate.food_dollars_per_day*estimate.num_of_days*estimate.num_of_people }} $</b></td>
+                        <td> <b> ${{ estimate.food_dollars_per_day*estimate.num_of_days*estimate.num_of_people }}</b></td>
                         @set('Total_Food_cost',estimate.food_dollars_per_day*estimate.num_of_days*estimate.num_of_people)
                     </tr>
 
@@ -96,7 +100,7 @@
                 </tbody>
                 <tr>
                     <td style="font-size:123%;"><b>Total Vehicle cost</b></td>
-                    <td><b>{{   estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles }}$</b></td>
+                    <td><b>${{   estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles }}</b></td>
                     
                 @set('Total_Vehicle_cost', estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles )
                 
@@ -104,7 +108,8 @@
                 @set('fullCost',Total_Vehicle_cost + Total_Food_cost +Total_Hotel_cost+Total_labor_cost)
                 </tr>
             </table>
-
+    </div>
+<div class="box">
             <a href="{{ '/add-material/' + estimate.id }}" class="btn btn-info float-right"><i class="fa fa-plus" style="font-size: 16px; padding-top: 4px;"></i> Add New</a>
             <h2 class="title" style="font-size:153%;">Materials</h2>
             @if(materials.length)
@@ -114,19 +119,31 @@
                         <th>Product</th>
                         <th>Unit Cost</th>
                         <th>Coverage Area</th>
+                        <th></th>
                         @set('Total_material_cost', 0)
                             @each(material in materials)
                         <tr> 
                             <td> {{ material.product }}</td>
                             <td> ${{ material.unit_cost }}</td>
                             <td> {{ material.coverage_area }}</td>
+                            <td>
+                                <form action="{{ '/materials/' + material.id + '?_method=DELETE' }}" method="POST" onClick="return confirm('Are you sure to delete? ')">
+                                    {{ csrfField() }}
+                                    <button class="button is-danger" type="submit">
+                                            <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>                    
+                                <a href="#">
+                                    
+                                </a>
+                            </td>
                             @set('Total_material_cost', (+Total_material_cost) + material.unit_cost*material.coverage_area) 
                         </tr>
                     
                         @endeach
                         <tr>
-                            <td colspan="2" style="font-size:123%"><b>Total material cost</b></td>
-                            <td><b>{{ Total_material_cost }} $</b></td>
+                            <td colspan="3" style="font-size:123%"><b>Total material cost</b></td>
+                            <td><b>${{ Total_material_cost }}</b></td>
                         </tr>
                     </tbody>
                 </table>
@@ -136,7 +153,9 @@
                     No materials added to this estimate!
                 </div>
             @endif
-            
+        </div>
+        <div class="box">
+        
             <a href="{{ '/add-misc/' + estimate.id }}" class="btn btn-info float-right"><i class="fa fa-plus" style="font-size: 16px; padding-top: 4px;"></i> Add New</a>
             <h1 class="title" style="font-size:153%;">Miscellaneous Costs</h1>
             @if(miscCosts.length)
@@ -156,7 +175,7 @@
                         </tr>
                         @endeach
                         <td style="font-size:123%"><b>Total miscellaneous cost</b></td>
-                        <td><b>{{ Total_mis_cost }} $</b></td>
+                        <td><b>${{ Total_mis_cost }}</b></td>
                     </tbody>
                 </table>
                 
@@ -168,7 +187,7 @@
             <table class="table table-bordered">
             <tbody>
             <td style="font-size:123%"><b>Total cost</b></td>
-                    <td><b>{{ (fullCost+Total_mis_cost*1.0) + (Total_material_cost) }} $</b></td>
+                    <td><b>${{ (fullCost+Total_mis_cost*1.0) + (Total_material_cost) }}</b></td>
             </tbody>
             </table>
     </div>

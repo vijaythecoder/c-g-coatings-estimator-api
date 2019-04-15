@@ -81,12 +81,12 @@ class EstimateController {
     estimate.dollars_per_mile = request.input('dollars_per_mile')
     estimate.multiplier = request.input('multiplier')
     await estimate.save();
-    const material = new Material()
-    material.product = request.input('product')
-    material.unit_cost = request.input('unit_cost')
+    // const material = new Material()
+    // material.product = request.input('product')
+    // material.unit_cost = request.input('unit_cost')
     
-    material.coverage_area = request.input('coverage_area')
-    await estimate.materials().saveMany([material])
+    // material.coverage_area = request.input('coverage_area')
+    // await estimate.materials().saveMany([material])
       
       session.flash({ notification: 'Estimate added!' })
       return response.redirect('/estimates')
@@ -215,6 +215,13 @@ class EstimateController {
      await estimate.delete()
      session.flash({ notification: 'Estimate and Material Deleted!' })
      return response.redirect('/estimates')  
+  }
+  
+  async destroyMaterial ({ params, response, session }) {
+    const material = await Material.find(params.id)
+     await material.delete()
+     session.flash({ notification: 'Material Deleted!' })
+     return response.redirect('back')
   }
 
   /* Show form to add a new material

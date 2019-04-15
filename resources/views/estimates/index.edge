@@ -29,11 +29,11 @@
                     {{ estimate.id }}
                 </td>
                 <td>
-                    {{ estimate.job_name }}
-                </td>
-                <td class="text-center">
-                    <a href="{{ '/estimates/' + estimate.id }}" class="btn btn-info"><i class="fa fa-list" style="font-size: 16px;
-                        padding-top: 5px;"></i> View</a>
+                    <b>
+                            <a href="{{ '/estimates/' + estimate.id }}">
+                                {{ estimate.job_name }}
+                            </a>
+                    </b>
                 </td>
                 <td class="text-center">
                    

@@ -18,7 +18,7 @@ static get rules () {
 
 static updateRules (estimate_id) {
   return {
-    product: `unique:materials,product,id,${estimate_id}`
+    job_name: `required|unique:estimates,job_name,id,${estimate_id}`,
   }
 }
 
