@@ -11,6 +11,11 @@
             <h1 class="title">{{ estimate.job_name }}</h1>
             
             <br>
+            @if(old('notification'))
+                <div class="notification is-success">
+                    {{ old('notification') }}
+                </div>
+            @endif
             <table class="table table-bordered">
                 <tbody>
 
@@ -111,7 +116,7 @@
                     <td style="font-size:123%;"><b>Total Vehicle cost</b></td>
                     <td><b>${{   estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles }}</b></td>
                     
-                @set('Total_Vehicle_cost', estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles )
+                @set('Total_Vehicle_cost', estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles*estimate.multiplier )
                 
                 {{--  <td>totalcost = {{Total_Vehicle_cost + Total_Food_cost +Total_Hotel_cost+Total_labor_cost}}</td>  --}}
                 @set('fullCost',Total_Vehicle_cost + Total_Food_cost +Total_Hotel_cost+Total_labor_cost)
@@ -173,18 +178,30 @@
                     <tbody>
                         <th>Cost Type</th>
                         <th>Price </th>
+                        <th></th>
                         @set('Total_mis_cost',0)
                         @each(miscCost in miscCosts)
                         <tr> 
                             <td> {{ miscCost.desc }}</td>
                             <td> ${{ miscCost.dollars }}</td>
-                           
+                            <td>
+                                <form action="{{ '/misc/' + miscCost.id + '?_method=DELETE' }}" method="POST" onClick="return confirm('Are you sure to delete? ')">
+                                    {{ csrfField() }}
+                                    <button class="button is-danger" type="submit">
+                                            <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>                    
+                                <a href="#">
+                                    
+                                </a>
+                            </td>
                             @set('Total_mis_cost', (+Total_mis_cost) + miscCost.dollars)     
                                             
                         </tr>
                         @endeach
                         <td style="font-size:123%"><b>Total miscellaneous cost</b></td>
                         <td><b>${{ Total_mis_cost }}</b></td>
+                        <td></td>
                     </tbody>
                 </table>
                 
@@ -193,11 +210,14 @@
                     No miscellaneous costs added to this estimate!
                 </div>
             @endif
-            <table class="table table-bordered">
+            
+    </div>
+    <div class="box">
+        <table class="table">
             <tbody>
-            <td style="font-size:123%"><b>Total cost</b></td>
-                    <td><b>{{ ((fullCost+Total_mis_cost*1.0) + (Total_material_cost) )*estimate.multiplier}} $</b></td>
+            <td style="font-size:153%"><b>Total cost</b></td>
+                <td style="font-size:153%" class="text-success"><b>${{ ((fullCost+Total_mis_cost*1.0) + (Total_material_cost) )}}</b></td>
             </tbody>
-            </table>
+        </table>
     </div>
 @endsection 

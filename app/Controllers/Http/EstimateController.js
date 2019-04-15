@@ -21,8 +21,12 @@ class EstimateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ auth, request, response, view }) {
-    const estimates = await Estimate.query().orderBy('id', 'desc').paginate(request.input('page'), 20)
+  async index ({ auth, request, response, view, params }) {
+    let search = request.input('search') ? request.input('search') : ''
+    const estimates = await Estimate
+                              .query()
+                              .where('job_name','like', '%'+search+'%')
+                              .orderBy('id', 'desc').paginate(request.input('page'), 20)
     return view.render('estimates.index', { estimates: estimates })
   }
 
@@ -223,6 +227,13 @@ class EstimateController {
     const material = await Material.find(params.id)
      await material.delete()
      session.flash({ notification: 'Material Deleted!' })
+     return response.redirect('back')
+  }
+
+  async destroyMisc ({ params, response, session }) {
+    const miscCost = await MiscCost.find(params.id)
+     await miscCost.delete()
+     session.flash({ notification: 'Miscellaneous Cost Deleted!' })
      return response.redirect('back')
   }
 
