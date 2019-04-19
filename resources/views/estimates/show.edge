@@ -215,8 +215,14 @@
     <div class="box">
         <table class="table">
             <tbody>
-            <td style="font-size:153%"><b>Total cost</b></td>
-                <td style="font-size:153%" class="text-success"><b>${{ ((fullCost+Total_mis_cost*1.0) + (Total_material_cost) )}}</b></td>
+                <tr>
+                    <td style="font-size:153%"><b>Total cost</b></td>
+                    <td style="font-size:153%" class="text-success"><b>${{ ((fullCost+Total_mis_cost*1.0) + (Total_material_cost) )}}</b></td>
+                </tr>
+                <tr>
+                    <td style="font-size:153%"><b>cost per Sqft</b></td>
+                    <td style="font-size:153%" class="text-success"><b>${{(((fullCost+Total_mis_cost*1.0) + (Total_material_cost) )/estimate.num_of_sqft).toFixed(2) }}</b></td>
+                </tr>
             </tbody>
         </table>
     </div>
