@@ -5,6 +5,7 @@ const Schema = use('Schema')
 
 class MaterialsSchema extends Schema {
   up () {
+    //creating materials table with following details
     this.create('materials', (table) => {
       table.increments()
       table.integer('estimate_id').unsigned().references('id').inTable('estimates')

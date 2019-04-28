@@ -23,6 +23,7 @@ class EstimateController {
    */
   async index ({ auth, request, response, view, params }) {
     let search = request.input('search') ? request.input('search') : ''
+    // getting estimates from db and sorting it in descending order and doing pagination for 20 per page
     const estimates = await Estimate
                               .query()
                               .where('job_name','like', '%'+search+'%')
@@ -86,12 +87,6 @@ class EstimateController {
     estimate.dollars_per_mile = request.input('dollars_per_mile')
     estimate.multiplier = request.input('multiplier')
     await estimate.save();
-    // const material = new Material()
-    // material.product = request.input('product')
-    // material.unit_cost = request.input('unit_cost')
-    
-    // material.coverage_area = request.input('coverage_area')
-    // await estimate.materials().saveMany([material])
       
       session.flash({ notification: 'Estimate added!' })
       return response.redirect('/estimates')
@@ -106,6 +101,7 @@ class EstimateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
+  // fetch all estimates materials and miscellaneous of particular ID
   async show ({params, view }) {
     
     const estimate = await Estimate.find(params.id)
@@ -126,8 +122,7 @@ class EstimateController {
   async edit ({ params, view }) {
      //edit page of the estimates.
     
-     console.log('edit');
-    
+      // fetch all estimates materials and miscellaneous of particular ID and update them
     const estimate = await Estimate.find(params.id)
     const materials = await estimate.materials().fetch()
     const miscCosts = await estimate.miscellaneous().fetch()
@@ -222,6 +217,8 @@ class EstimateController {
      session.flash({ notification: 'Estimate and Material Deleted!' })
      return response.redirect('/estimates')  
   }
+
+  // Delete particular material from estimate
   
   async destroyMaterial ({ params, response, session }) {
     const material = await Material.find(params.id)
@@ -230,6 +227,8 @@ class EstimateController {
      return response.redirect('back')
   }
 
+
+  // Delete particular miscellaneous from estimate
   async destroyMisc ({ params, response, session }) {
     const miscCost = await MiscCost.find(params.id)
      await miscCost.delete()

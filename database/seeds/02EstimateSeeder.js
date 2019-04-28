@@ -12,13 +12,12 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory')
-// const Database = use('Database')
+
 
 class EstimateSeeder {
   async run () {
+    // create 100 samples for estimates
     await Factory.model('App/Models/Estimate').createMany(100)
-    // const estimates = await Database.table('Estimates')
-    // console.log(estimates)
     
   }
 }

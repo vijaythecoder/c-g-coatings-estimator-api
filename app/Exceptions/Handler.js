@@ -22,23 +22,26 @@ class ExceptionHandler extends BaseExceptionHandler {
    */
   async handle (error, { request, response, session }) {
     // console.log(error.name)
+    // catching validation exception
     if (error.name === 'ValidationException') {
       session.withErrors(error.messages).flashAll()
       await session.commit()
       return response.redirect('back')
     }
+    // catching InvalidSession Exception 
     if (error.name === 'InvalidSessionException'){
       session.flash({ notification:' You need to login first' })   
       await session.commit()
       return response.redirect('/login')
     }
-
+  // catching PasswordMisMatch Exception
     if (error.name === 'PasswordMisMatchException'){
       session.flash({ notification:'Your password is invalid' }) 
       await session.commit()
       return response.redirect('/login')
     }
 
+    // catching UserNotFound Exception
     if (error.name === 'UserNotFoundException'){
       session.flash({ notification:'Your email is not found' }) 
       await session.commit()

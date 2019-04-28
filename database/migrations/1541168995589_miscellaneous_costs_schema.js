@@ -5,6 +5,7 @@ const Schema = use('Schema')
 
 class MiscellaneousCostsSchema extends Schema {
   up () {
+    // creating Miscellaneous Cost table with following details
     this.create('miscellaneous_costs', (table) => {
       table.increments()
       table.integer('estimate_id').unsigned().references('id').inTable('estimates')

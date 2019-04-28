@@ -15,6 +15,7 @@ const Factory = use('Factory')
 
 class MaterialSeeder {
   async run () {
+        // create 50 samples for materials
     await Factory.model('App/Models/Material').createMany(50)
   }
 }

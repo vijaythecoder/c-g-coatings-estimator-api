@@ -23,6 +23,7 @@ class UserController {
 
     }
 
+    // once user is authticated redirect him to login page
     async showLogin({ view, response, auth }) {     
       if(auth.user && auth.user.id) {     
         return response.redirect('/estimates')
@@ -30,6 +31,7 @@ class UserController {
       return view.render('login')
     }
 
+    // once user clicked forget password redirect him to forget password page
     async showForgot({ view, response, auth }) {     
       if(auth.user && auth.user.id) {     
         return response.redirect('/estimates')
@@ -37,6 +39,8 @@ class UserController {
       return view.render('forgot-password')
     }
 
+
+    // is user is already logged in logout and tehen authnticate and display notification
     async login ({ request, auth, response, session }) {
         await auth.logout()
         const { email, password } = request.all()
@@ -45,6 +49,7 @@ class UserController {
         return response.redirect('/estimates')
     }
 
+    // if unautherised user trying to access your account display message
     async show ({ auth, params }) {
         console.log('inside show')
         if (auth.user.id !== Number(params.id)) {
@@ -55,7 +60,7 @@ class UserController {
       }
       async register({request,response,session}){
         
-        // creating first user
+        // creating new user by taking inputs and save them in database
         const user = new User();
         user.username = request.only(['username']).username;
         user.email = request.only(['email']).email;
@@ -80,7 +85,7 @@ class UserController {
           }
       }
 
-      // Get the credentials and 
+      // Get the credentials if wrong or missing display llowing message
       async getUser({auth,response}){
         try {
           return await auth.getUser()

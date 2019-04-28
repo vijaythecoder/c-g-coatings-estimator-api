@@ -7,6 +7,8 @@ class EstimatesSchema extends Schema {
   up () {
     this.create('estimates', (table) => {
       table.increments()
+      
+//creating estimate model with following details
       table.string('job_name').unique()
       table.string('location')
       table.integer('num_of_people').defaultTo(10)      

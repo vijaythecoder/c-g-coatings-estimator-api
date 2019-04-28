@@ -1,6 +1,7 @@
 'use strict'
 
 class ViewController {
+    // render the views before displaying
     async contact( {view} ){
         return view.render('contact')
     }
