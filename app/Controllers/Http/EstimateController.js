@@ -206,7 +206,7 @@ class EstimateController {
     }
    
    session.flash({ notification: 'Estimate, materials, miscellaneous costs are updated' })
-   return response.redirect('/estimates')
+   return response.redirect('/estimates/' + estimate.id)
     // update estimate 
   }
 
