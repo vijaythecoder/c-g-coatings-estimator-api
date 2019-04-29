@@ -116,7 +116,7 @@
                     <td style="font-size:123%;"><b>Total Vehicle cost</b></td>
                     <td><b>${{   estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles }}</b></td>
                     
-                @set('Total_Vehicle_cost', estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles*estimate.multiplier )
+                @set('Total_Vehicle_cost', estimate.dollars_per_mile*estimate.num_of_miles_pervehicle*estimate.num_of_vehicles)
                 
                 {{--  <td>totalcost = {{Total_Vehicle_cost + Total_Food_cost +Total_Hotel_cost+Total_labor_cost}}</td>  --}}
                 @set('fullCost',Total_Vehicle_cost + Total_Food_cost +Total_Hotel_cost+Total_labor_cost)
@@ -151,7 +151,7 @@
                                     
                                 </a>
                             </td>
-                            @set('Total_material_cost', (+Total_material_cost) + material.unit_cost*material.coverage_area) 
+                            @set('Total_material_cost', (+Total_material_cost) + material.unit_cost*(estimate.num_of_sqft/material.coverage_area)) 
                         </tr>
                     
                         @endeach
@@ -217,11 +217,11 @@
             <tbody>
                 <tr>
                     <td style="font-size:153%"><b>Total cost</b></td>
-                    <td style="font-size:153%" class="text-success"><b>${{ ((fullCost+Total_mis_cost*1.0) + (Total_material_cost) )}}</b></td>
+                    <td style="font-size:153%" class="text-success"><b>${{ parseFloat(((fullCost+Total_mis_cost*1.0) + (Total_material_cost)*estimate.multiplier , 2) )}}</b></td>
                 </tr>
                 <tr>
                     <td style="font-size:153%"><b>cost per Sqft</b></td>
-                    <td style="font-size:153%" class="text-success"><b>${{(((fullCost+Total_mis_cost*1.0) + (Total_material_cost) )/estimate.num_of_sqft).toFixed(2) }}</b></td>
+                    <td style="font-size:153%" class="text-success"><b>${{ parseFloat((parseFloat(((fullCost+Total_mis_cost*1.0) + (Total_material_cost)*estimate.multiplier , 2) )/estimate.num_of_sqft).toFixed(2), 2) }}</b></td>
                 </tr>
             </tbody>
         </table>

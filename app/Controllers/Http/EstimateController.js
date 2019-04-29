@@ -1,5 +1,9 @@
 'use strict'
+  const View = use('View')
 
+  View.global('parseFloat', function (value, decimal) {
+  return parseFloat(value).toFixed(decimal)
+ })
 /**
  * Resourceful controller for interacting with estimates
  */
@@ -94,7 +98,7 @@ class EstimateController {
     // await estimate.materials().saveMany([material])
       
       session.flash({ notification: 'Estimate added!' })
-      return response.redirect('/estimates')
+      return response.redirect('/estimates/' + estimate.id)
   }
 
   /**

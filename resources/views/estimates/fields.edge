@@ -117,14 +117,14 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">$</span>
                 </div>
-                <input type="number" class="form-control" aria-describedby="basic-addon1" id="dollars_per_mile" name="dollars_per_mile" placeholder="Enter cost per mile" value="{{ estimate.dollars_per_mile ? estimate.dollars_per_mile : null }}">
+                <input type="number" step="0.01" class="form-control" aria-describedby="basic-addon1" id="dollars_per_mile" name="dollars_per_mile" placeholder="Enter cost per mile" value="{{ estimate.dollars_per_mile ? estimate.dollars_per_mile : null }}">
             </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
             <label for="multiplier">Multiplier</label>
-            <input type="number" class="form-control" id="multiplier" name="multiplier" value="{{ estimate.multiplier ? estimate.multiplier : null }}">
+            <input type="number" step="0.01" class="form-control" id="multiplier" name="multiplier" value="{{ estimate.multiplier ? estimate.multiplier : null }}">
         </div>
     </div>
   
