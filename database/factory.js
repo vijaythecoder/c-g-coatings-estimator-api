@@ -15,6 +15,7 @@
 const Factory = use('Factory')
 const Hash = use('Hash')
 
+// We are creating Users data with columns username, password, email.
 Factory.blueprint('App/Models/User', async (faker) => {
   return {
     username: faker.username(),
@@ -22,6 +23,8 @@ Factory.blueprint('App/Models/User', async (faker) => {
     email: faker.email()
   }
 })
+
+/**  */
 
 Factory.blueprint('App/Models/Estimate', async (faker) => {
   return {
@@ -51,7 +54,7 @@ Factory.blueprint('App/Models/Material', async (faker) => {
     unit_cost: faker.integer({ min: 100, max: 1000 }),
     coverage_area: faker.integer({ min: 1, max: 500 })
   }
-  })
+})
 
 Factory.blueprint('App/Models/MiscCost', async (faker) => {
   return {
