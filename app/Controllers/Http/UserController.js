@@ -1,3 +1,4 @@
+// @author SairamVankina
 'use strict'
 const uuid = use('uuid/v1')
 const { validate } = use('Validator')
@@ -24,18 +25,23 @@ class UserController {
     }
 
     // once user is authticated redirect him to login page
-    async showLogin({ view, response, auth }) {     
+    async showLogin({ view, response, auth }) {    
+      // check if user is valid user if yes direct to estimates
       if(auth.user && auth.user.id) {     
         return response.redirect('/estimates')
       }     
+      //Else return to ogin page
       return view.render('login')
     }
 
     // once user clicked forget password redirect him to forget password page
     async showForgot({ view, response, auth }) {     
+            // check if user is valid user if yes direct to estimates
       if(auth.user && auth.user.id) {     
         return response.redirect('/estimates')
       }     
+            // Else direct to fordot paddeord page
+
       return view.render('forgot-password')
     }
 

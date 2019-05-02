@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Estimate extends Model {
 
-  /* Validation rules
+  /* Validation rules 
 * 
 */
 static get rules () {
